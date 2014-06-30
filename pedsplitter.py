@@ -21,8 +21,6 @@ def putInFile(outFileDict, header, outputDir, line):
     currFile.write("\t".join(splitLine))
 
 def main():
-    #print(len(sys.argv))
-    #print(sys.argv)
     if(len(sys.argv)!=3):
         print("incorrect usage - pedsplitter needs two parameters\n"+
               "e.g. pedsplitter /dir/pedBaseFile /outputDir/")
@@ -34,7 +32,7 @@ def main():
     
     #get header and advance to second line
     header = "\t".join(pedFile.readline().split(","))
-    print(header)
+    
     next(pedFile)
     #split pednums
     for line in pedFile:
@@ -43,6 +41,8 @@ def main():
     pedFile.close()
     for _,pedFile in outFileDict.iteritems():
         pedFile.close()
+    
+    print("Done :)")
 
 if __name__ == '__main__':
     main()
