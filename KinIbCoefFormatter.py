@@ -33,8 +33,8 @@ def main():
         if status:
             lineData[0] = convertFamID(lineData[0])
             convertLD(lineData)
-            outPedFile.write(",".join(lineData[0:4])+"\n")
-            outListFile.write(",".join(lineData[0:2])+"\n")
+            outPedFile.write(" ".join(lineData[0:4])+"\n")
+            outListFile.write(" ".join(lineData[0:2])+"\n")
         status = False
     
     #close files
