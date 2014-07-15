@@ -30,7 +30,7 @@ def main():
     for line in pedFile:
         lineData = line.strip().split(",")
         status = True
-        if not(status):
+        if status:
             lineData[0] = convertFamID(lineData[0])
             convertLD(lineData)
             outPedFile.write(",".join(lineData[0:4])+"\n")
