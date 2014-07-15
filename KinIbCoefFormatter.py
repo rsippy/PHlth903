@@ -16,15 +16,16 @@ def main():
     outputFilePath = os.getcwd()
     print(outputFilePath)
     pedFile = open(pedFilePath, "r")
-    outPedFile = open(outputFilePath + "outPed", "w+")
-    outListFile = open(outputFilePath + "outList", "w+")
+    outPedFile = open(outputFilePath + "/outPed", "w+")
+    outListFile = open(outputFilePath + "/outList", "w+")
     
     next(pedFile)
     #split pednums
     for line in pedFile:
         lineData = line.strip().split(",")
-        outPedFile.write(",".join(lineData[0:3]))
-        outListFile.write(",".join(lineData[0:1]))
+        outPedFile.write(",".join(lineData[0:3])+"\n")
+        outListFile.write(",".join(lineData[0:1])+"\n")
+    
     #close files
     pedFile.close()
     outPedFile.close()
