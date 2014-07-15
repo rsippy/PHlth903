@@ -23,13 +23,13 @@ def main():
     outListFile = open(outputFilePath + "/outList", "w+")
     idDict.update({"0":"0"})
     famDict.update({"0":"0"})
+    status = True
     #len(idDict)
     
     next(pedFile)
     #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
-        status = True
         if status:
             lineData[0] = convertFamID(lineData[0])
             convertLD(lineData)
