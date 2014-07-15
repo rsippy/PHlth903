@@ -9,22 +9,21 @@ import os
 
 def main():
     if(len(sys.argv)!=2):
-        print("incorrect usage - KinIbCoefFormatter needs two parameters\n"+
+        print("incorrect usage - KinIbCoefFormatter needs one parameter\n"+
               "e.g. python KinIbCoefFormatter /dir/pedFile")
 
     pedFilePath = sys.argv[1]
     outputFilePath = os.getcwd()
-    print(outputFilePath)
     pedFile = open(pedFilePath, "r")
     outPedFile = open(outputFilePath + "/outPed", "w+")
     outListFile = open(outputFilePath + "/outList", "w+")
     
     next(pedFile)
-    #split pednums
+    #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
-        outPedFile.write(",".join(lineData[0:3])+"\n")
-        outListFile.write(",".join(lineData[0:1])+"\n")
+        outPedFile.write(",".join(lineData[0:4])+"\n")
+        outListFile.write(",".join(lineData[0:2])+"\n")
     
     #close files
     pedFile.close()
