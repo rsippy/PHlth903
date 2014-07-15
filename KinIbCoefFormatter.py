@@ -22,6 +22,7 @@ def main():
     #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
+        convertLD(lineData)
         outPedFile.write(",".join(lineData[0:4])+"\n")
         outListFile.write(",".join(lineData[0:2])+"\n")
     
@@ -29,6 +30,16 @@ def main():
     pedFile.close()
     outPedFile.close()
     outListFile.close()
+    
+def convert2intID(stringID):
+    if(len(stringID)>1):
+        return str(int(stringID[5:]))
+    else:
+        return stringID
+
+def convertLD(lineData):
+    for i in xrange(1,4):
+        lineData[i] = convert2intID(lineData[i])
 
 if __name__ == '__main__':
     main()
