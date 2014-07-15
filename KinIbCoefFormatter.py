@@ -44,6 +44,7 @@ def convertFamID(stringID):
     if not(famDict.has_key(stringID)):
         famDict.update({stringID : str(len(famDict))})
     return(famDict.get(stringID))
+    return(stringID)
     
 
 def convert2intID(stringID):
