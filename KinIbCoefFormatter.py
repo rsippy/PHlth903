@@ -15,7 +15,7 @@ def main():
     pedFilePath = sys.argv[1]
     outputFilePath = os.getcwd()
     pedFile = open(pedFilePath, "r")
-    outPedFile = open(outputFilePath + "outPed", "w+")
+    outPedFile = open(outputFilePath + "/outPed", "w+")
     outListFile = open(outputFilePath + "/outList", "w+")
     
     next(pedFile)
