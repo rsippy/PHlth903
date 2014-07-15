@@ -29,11 +29,13 @@ def main():
     #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
-        if not(lineData[0]=="2"):
+        status = True
+        if not(status):
             lineData[0] = convertFamID(lineData[0])
             convertLD(lineData)
             outPedFile.write(",".join(lineData[0:4])+"\n")
             outListFile.write(",".join(lineData[0:2])+"\n")
+            status = False
     
     #close files
     pedFile.close()
