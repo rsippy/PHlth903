@@ -35,7 +35,7 @@ def main():
             convertLD(lineData)
             outPedFile.write(",".join(lineData[0:4])+"\n")
             outListFile.write(",".join(lineData[0:2])+"\n")
-            status = False
+        status = False
     
     #close files
     pedFile.close()
