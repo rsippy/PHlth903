@@ -27,7 +27,7 @@ def main():
     #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
-        lineData[0] = lineData[0]-1
+        lineData[0] = str(int(lineData[0])-1)
         convertLD(lineData)
         outPedFile.write(",".join(lineData[0:4])+"\n")
         outListFile.write(",".join(lineData[0:2])+"\n")
