@@ -9,6 +9,7 @@ import os
 from __builtin__ import id
 
 idDict = dict()
+famDict = dict()
 
 def main():
     if(len(sys.argv)!=2):
@@ -21,13 +22,14 @@ def main():
     outPedFile = open(outputFilePath + "/outPed", "w+")
     outListFile = open(outputFilePath + "/outList", "w+")
     idDict.update({"0":"0"})
+    famDict.update({"0":"0"})
     #len(idDict)
     
     next(pedFile)
     #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
-        lineData[0] = str(int(lineData[0])-1)
+        lineData[0] = convertFamID(lineData[0])
         convertLD(lineData)
         outPedFile.write(",".join(lineData[0:4])+"\n")
         outListFile.write(",".join(lineData[0:2])+"\n")
@@ -37,6 +39,12 @@ def main():
     outPedFile.close()
     outListFile.close()
 
+
+def convertFamID(stringID):
+    if not(famDict.has_key(stringID)):
+        famDict.update({stringID : str(len(famDict))})
+    return(famDict.get(stringID))
+    
 
 def convert2intID(stringID):
     if(len(stringID)>1):
