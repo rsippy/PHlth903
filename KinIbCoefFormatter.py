@@ -21,12 +21,13 @@ def main():
     outPedFile = open(outputFilePath + "/outPed", "w+")
     outListFile = open(outputFilePath + "/outList", "w+")
     idDict.update({"0":"0"})
-    len(idDict)
+    #len(idDict)
     
     next(pedFile)
     #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
+        lineData[0] = lineData[0]-1
         convertLD(lineData)
         outPedFile.write(",".join(lineData[0:4])+"\n")
         outListFile.write(",".join(lineData[0:2])+"\n")
@@ -35,7 +36,8 @@ def main():
     pedFile.close()
     outPedFile.close()
     outListFile.close()
-    
+
+
 def convert2intID(stringID):
     if(len(stringID)>1):
         intID = str(int(stringID[5:]))
