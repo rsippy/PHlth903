@@ -20,7 +20,6 @@ class idTranslator(object):
         self.count = 0
         if(haveZero):
             self.put("0", 0)
-            self.count = 0
         
     def put(self, sID, iID):
         self.sID2iID.update({sID : iID})
