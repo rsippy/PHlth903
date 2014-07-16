@@ -49,14 +49,14 @@ def main():
     pedFilePath = sys.argv[1]
     outputFilePath = os.getcwd()
     currentWorkingDir = os.getcwd()
-    tempDir = currentWorkingDir + "/KIC_TEMP"
+    tempDir = currentWorkingDir + "/KIC_TEMP/"
     while(os.path.exists(tempDir)):
         tempDir += "_" + str(random.randint(0,999))
     os.mkdir(tempDir)
     pedFile = open(pedFilePath, "r")
-    KICpedFilepath = tempDir + "/outPed"
-    KIClistFilepath = tempDir + "/outList"
-    KICoutFilepath = tempDir + "/TEMP_KIC_out"
+    KICpedFilepath = tempDir + "outPed"
+    KIClistFilepath = tempDir + "outList"
+    KICoutFilepath = tempDir + "TEMP_KIC_out"
     KICpedFile = open(KICpedFilepath, "w+")
     KIClistFile = open(KIClistFilepath, "w+")
     idDict.update({"0":"0"})
@@ -96,7 +96,7 @@ def main():
     os.remove(KIClistFilepath)
     os.remove(KICoutFilepath)
     os.remove(KICpedFilepath)
-    os.rmdir(tempDir + "/")
+    os.rmdir(tempDir)
     shutil.rmtree(tempDir +"/", True)
 
 '''
