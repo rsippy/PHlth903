@@ -92,7 +92,7 @@ def main():
     outFile.close()
     
     #delete temp dir
-    shutil.rmtree(tempDir)
+    shutil.rmtree(tempDir, True)
 
 '''
 def convertFamID(stringID):
