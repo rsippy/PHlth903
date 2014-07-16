@@ -7,6 +7,7 @@ Created on Jul 15, 2014
 import sys
 import os
 import subprocess
+import random
 
 idDict = dict()
 famDict = dict()
@@ -18,31 +19,37 @@ def main():
 
     pedFilePath = sys.argv[1]
     outputFilePath = os.getcwd()
+    currentWorkingDir = os.getcwd()
+    tempDir = currentWorkingDir + "/KIC_TEMP"
+    while(os.path.exists(tempDir)):
+        tempDir += "_" + str(random.randint(0,999))
+    os.mkdir(tempDir)
     pedFile = open(pedFilePath, "r")
-    outPedFilePath = outputFilePath + "/outPed"
-    outListFilePath = outputFilePath + "/outList"
-    outPedFile = open(outPedFilePath, "w+")
-    outListFile = open(outListFilePath, "w+")
+    KICpedFilepath = tempDir + "/outPed"
+    KIClistFilepath = tempDir + "/outList"
+    KICoutFilepath = tempDir + "/KIC_out"
+    KICpedFile = open(KICpedFilepath, "w+")
+    KIClistFile = open(KIClistFilepath, "w+")
     idDict.update({"0":"0"})
     famDict.update({"0":"0"})
-    #len(idDict)
     
+    #skip header
     next(pedFile)
     #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
         lineData[0] = convertFamID(lineData[0])
         convertLD(lineData)
-        outPedFile.write(" ".join(lineData[0:4])+"\n")
-        outListFile.write(" ".join(lineData[0:2])+"\n")
+        KICpedFile.write(" ".join(lineData[0:4])+"\n")
+        KIClistFile.write(" ".join(lineData[0:2])+"\n")
     
     #close files
     pedFile.close()
-    outPedFile.close()
-    outListFile.close()
+    KICpedFile.close()
+    KIClistFile.close()
     
     #run KIB
-    subprocess.call(["/project/EngelmanGroup/GAW19/KinInbcoef/./KinInbcoef",outPedFilePath,outListFilePath,"tempOutFile"])
+    subprocess.call(["/project/EngelmanGroup/GAW19/KinInbcoef/./KinInbcoef",KICpedFilepath,KIClistFilepath,KICoutFilepath])
 
 
 def convertFamID(stringID):
