@@ -7,6 +7,7 @@ Created on Jul 15, 2014
 import sys
 import os
 import subprocess
+import shutil
 import random
 
 idDict = dict()
@@ -89,6 +90,9 @@ def main():
         print("%s\t%s\t%s\t%s"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(int(lineData[1])), _indDict.getSID(int(lineData[2])), lineData[3]))
         outFile.write("%s\t%s\t%s\t%s\n"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(int(lineData[1])), _indDict.getSID(int(lineData[2])), lineData[3]))
     outFile.close()
+    
+    #delete temp dir
+    shutil.rmtree(tempDir)
 
 '''
 def convertFamID(stringID):
