@@ -94,12 +94,17 @@ def convertFamID(stringID):
     
 
 def convert2intID(stringID):
+    x = _indDict.getIID(stringID)
     if(len(stringID)>1):
         intID = str(int(stringID[5:]))
         if not(idDict.has_key(intID)):
             idDict.update({intID : str(len(idDict))})
+            y = idDict.get(intID)
+            print(str(x) + "|" + str(y))
         return idDict.get(intID)
     else:
+        y = stringID
+        print(str(x) + "|" + str(y))
         return stringID
 
 def convertLD(lineData):
