@@ -81,8 +81,13 @@ def main():
     
     #run KIB
     subprocess.call(["/project/EngelmanGroup/GAW19/KinInbcoef/./KinInbcoef",KICpedFilepath,KIClistFilepath,KICoutFilepath])
+    
+    KICoutFile = open(KICoutFilepath)
+    for line in KICoutFile:
+        lineData = line.split(" ")
+        print("%s\t%s\t%s"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(lineData[1]), _indDict.getSID(lineData[2])))
 
-
+'''
 def convertFamID(stringID):
     x = _famDict.getIID(stringID)
     if not(famDict.has_key(stringID)):
@@ -108,10 +113,10 @@ def convert2intID(stringID):
         y = stringID
         print(str(x) + "|" + str(y))
         return stringID
+'''
 
 def convertLD(lineData):
     for i in xrange(1,4):
-        #lineData[i] = convert2intID(lineData[i])
         lineData[i] = str(_indDict.getIID(lineData[i]))
 
 if __name__ == '__main__':
