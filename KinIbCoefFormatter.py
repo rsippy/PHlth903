@@ -92,6 +92,9 @@ def main():
     outFile.close()
     
     #delete temp dir
+    os.remove(KIClistFilepath)
+    os.remove(KICoutFilepath)
+    os.remove(KICpedFilepath)
     shutil.rmtree(tempDir, True)
 
 '''
