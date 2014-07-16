@@ -84,7 +84,7 @@ def main():
     
     KICoutFile = open(KICoutFilepath)
     for line in KICoutFile:
-        lineData = line.split(" ")
+        lineData = line.strip().split(" ")
         print("%s\t%s\t%s\t%s"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(int(lineData[1])), _indDict.getSID(int(lineData[2])), lineData[3]))
 
 '''
