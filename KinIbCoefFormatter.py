@@ -33,7 +33,7 @@ class idTranslator(object):
 
     def getSID(self, iID):
         if(self.iID2sID.has_key(iID)):
-            return(self.iID2sID.has_key(iID))
+            return(self.iID2sID.get(iID))
         else:
             return(None)
         
@@ -85,7 +85,7 @@ def main():
     KICoutFile = open(KICoutFilepath)
     for line in KICoutFile:
         lineData = line.split(" ")
-        print("%s\t%s\t%s"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(lineData[1]), _indDict.getSID(lineData[2])))
+        print("%s\t%s\t%s"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(int(lineData[1])), _indDict.getSID(int(lineData[2]))))
 
 '''
 def convertFamID(stringID):
