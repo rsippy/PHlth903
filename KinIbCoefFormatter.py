@@ -12,6 +12,35 @@ import random
 idDict = dict()
 famDict = dict()
 
+
+class idTranslator(object):
+    def __init__(self, haveZero):
+        self.sID2iID = dict()
+        self.iID2sID = dict()
+        if(haveZero):
+            self.put("0", 0)
+        self.count = 0
+        
+    def put(self, sID, iID):
+        self.sID2iID.update({sID : iID})
+        self.iID2sID.update({iID : sID})
+        self.count+=1
+    
+    def getIID(self, sID):
+        if not(self.sID2iID.has_key(sID)):
+            self.count+=1
+            self.put(sID, self.count)
+        return(self.sID2iID.get(sID))
+
+    def getSID(self, iID):
+        if(self.iID2sID.has_key(iID)):
+            return(self.iID2sID.has_key(iID))
+        else:
+            return(None)
+        
+_indDict = idTranslator(True)
+_famDict = idTranslator(True)
+
 def main():
     if(len(sys.argv)!=2):
         print("incorrect usage - KinIbCoefFormatter needs one parameter\n"+
@@ -32,6 +61,8 @@ def main():
     KIClistFile = open(KIClistFilepath, "w+")
     idDict.update({"0":"0"})
     famDict.update({"0":"0"})
+    #indDict = idTranslator(True)
+    #famDict = idTranslator(True)
     
     #skip header
     next(pedFile)
@@ -53,8 +84,11 @@ def main():
 
 
 def convertFamID(stringID):
+    x = _famDict.getIID(stringID)
     if not(famDict.has_key(stringID)):
         famDict.update({stringID : str(len(famDict))})
+    y = famDict.get(stringID)
+    print(str(x) + "|" + str(y))
     return(famDict.get(stringID))
     
 
