@@ -19,8 +19,10 @@ def main():
     pedFilePath = sys.argv[1]
     outputFilePath = os.getcwd()
     pedFile = open(pedFilePath, "r")
-    outPedFile = open(outputFilePath + "/outPed", "w+")
-    outListFile = open(outputFilePath + "/outList", "w+")
+    outPedFilePath = outputFilePath + "/outPed"
+    outListFilePath = outputFilePath + "/outList"
+    outPedFile = open(outPedFilePath, "w+")
+    outListFile = open(outListFilePath, "w+")
     idDict.update({"0":"0"})
     famDict.update({"0":"0"})
     #len(idDict)
@@ -38,6 +40,9 @@ def main():
     pedFile.close()
     outPedFile.close()
     outListFile.close()
+    
+    #run KIB
+    subprocess.call(["/project/EngelmanGroup/GAW19/KinInbcoef/./KinInbcoef",outPedFilePath,outListFilePath,"tempOutFile"])
 
 
 def convertFamID(stringID):
