@@ -83,7 +83,7 @@ def main():
     subprocess.call(["/project/EngelmanGroup/GAW19/KinInbcoef/./KinInbcoef",KICpedFilepath,KIClistFilepath,KICoutFilepath])
     
     KICoutFile = open(KICoutFilepath)
-    outFile = open(currentWorkingDir + "KIC_out", "w+")
+    outFile = open(currentWorkingDir + "/KIC_out", "w+")
     for line in KICoutFile:
         lineData = line.strip().split(" ")
         print("%s\t%s\t%s\t%s"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(int(lineData[1])), _indDict.getSID(int(lineData[2])), lineData[3]))
