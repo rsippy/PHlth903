@@ -111,7 +111,8 @@ def convert2intID(stringID):
 
 def convertLD(lineData):
     for i in xrange(1,4):
-        lineData[i] = convert2intID(lineData[i])
+        #lineData[i] = convert2intID(lineData[i])
+        lineData[i] = str(_indDict.getIID(lineData[i]))
 
 if __name__ == '__main__':
     main()
