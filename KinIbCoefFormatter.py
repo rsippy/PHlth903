@@ -68,7 +68,8 @@ def main():
     #make new formatted files
     for line in pedFile:
         lineData = line.strip().split(",")
-        lineData[0] = convertFamID(lineData[0])
+        #lineData[0] = convertFamID(lineData[0])
+        lineData[0] = str(_famDict.getIID(lineData[0]))
         convertLD(lineData)
         KICpedFile.write(" ".join(lineData[0:4])+"\n")
         KIClistFile.write(" ".join(lineData[0:2])+"\n")
