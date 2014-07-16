@@ -29,7 +29,6 @@ class idTranslator(object):
     
     def getIID(self, sID):
         if not(self.sID2iID.has_key(sID)):
-            self.count+=1
             self.put(sID, self.count)
         return(self.sID2iID.get(sID))
 
