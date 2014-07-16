@@ -89,7 +89,7 @@ def convertFamID(stringID):
     y = famDict.get(stringID)
     print(str(x) + "|" + str(y))
     #return(famDict.get(stringID))
-    return(x)
+    return(str(x))
     
 
 def convert2intID(stringID):
