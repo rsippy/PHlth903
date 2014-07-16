@@ -94,7 +94,9 @@ def convertFamID(stringID):
     
 
 def convert2intID(stringID):
+    
     x = _indDict.getIID(stringID)
+    return(str(x))
     if(len(stringID)>1):
         intID = str(int(stringID[5:]))
         if not(idDict.has_key(intID)):
