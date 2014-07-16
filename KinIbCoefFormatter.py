@@ -96,8 +96,8 @@ def main():
     os.remove(KIClistFilepath)
     os.remove(KICoutFilepath)
     os.remove(KICpedFilepath)
-    os.rmdir(tempDir)
-    shutil.rmtree(tempDir, True)
+    os.rmdir(tempDir + "/")
+    shutil.rmtree(tempDir +"/", True)
 
 '''
 def convertFamID(stringID):
