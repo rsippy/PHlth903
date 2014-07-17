@@ -3,38 +3,88 @@ Created on Jul 3, 2014
 
 @author: eotles
 '''
+import sys
+import os
+from sets import Set as set
 
-class person(object):
-    def __init__(self, infoList):
-        self.father = None
-        self.mother = None
-        self.pedigree = None
-        self.id = None
-        self.sex = None
-        self.twin = None
-        self.infoDict = dict()
+class Person(object):
+    def __init__(self, caseID):
+        self.id = caseID
         self.kinshipDict = dict()
     
     def putKinship(self, relative, kinshipCoefficient):
-        1
+        if not(self.kinshipDict.get(kinshipCoefficient)):
+            self.kinshipDict.update({kinshipCoefficient : set()})
+        relativesWithGivenKC = self.kinshipDict.get(kinshipCoefficient)
+        relativesWithGivenKC.add(relative)
+        self.kinshipDict.update({kinshipCoefficient : relativesWithGivenKC})
+    
+    def toString(self):
+        outString = self.id
+        for kc,relativesWithGivenKC in self.kinshipDict.iteritems():
+            tempString = "\n" + str(kc) + ":"
+            for relative in relativesWithGivenKC:
+                tempString += relative.id + ","
+            outString += tempString[:-1]
+        return(outString)
+                
             
 def main():
-    KICoutFile = open()
-    #map IDs to people
-    people = dict()
+    if(len(sys.argv)!=2):
+        print("incorrect usage - KinIbCoefFormatter needs one parameter\n"+
+              "e.g. python Casel /dir/KICout")
+        exit(0)
     
-    #list of pointers to cases
-    cases = list()
+    #map IDs to people / sets that are pointers to people that are either cases
+    #or controls
+    people = dict()
+    cases = set()
+    controls = set()
+
+    currDir = os.path.dirname(os.path.realpath(__file__))
+    KICoutFilepath = sys.argv[1]
+    caseFilepath = currDir + "/cases"
+    contFilepath = currDir + "/controls"
+    
+    #load cases
+    caseFile = open(caseFilepath)
+    for caseID in caseFile:
+        caseID = caseID.strip()
+        print("case: %s" %(caseID))
+        case = Person(caseID)
+        people.update({caseID : case})
+        cases.add(case)
+    caseFile.close()
+    
+    #load controls
+    contFile = open(contFilepath)
+    for contID in contFile:
+        contID = contID.strip()
+        print("cont: %s" %(contID))
+        cont = Person(contID)
+        people.update({contID : cont})
+        controls.add(case)
+    contFile.close()
+    
+    #load KIC info
+    KICoutFile = open(KICoutFilepath)
     
     for line in KICoutFile:
         lineData = line.strip().split(",")
-        lineData = [int(_) for _ in lineData]
-        currPerson = people.get(lineData[0])
-        relative = people.get(lineData[1])
-        currPerson.putKinship(relative, lineData[2])
+        currPersonID = lineData[1]
+        if(people.has_key(currPersonID)):
+            currPerson = people.get(currPersonID)
+            print("person exists")
+            relativeID = lineData[2]
+            if(people.has_key(relativeID)):
+                relative = people.get(relativeID)
+                kc = float(lineData[3])
+                if(kc > 0):
+                    print("tada!")
+                    currPerson.putKinship(relative, kc)
     
     for case in cases:
-        print("%s\t" %(case.id) + case.kinshipDict)
+        print(case.toString())
         
 
 
