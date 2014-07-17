@@ -32,7 +32,7 @@ class Person(object):
 def main():
     if(len(sys.argv)!=2):
         print("incorrect usage - KinIbCoefFormatter needs one parameter\n"+
-              "e.g. python Casel /dir/KICout")
+              "e.g. python casel /dir/KICout")
         exit(0)
     
     #map IDs to people / sets that are pointers to people that are either cases
@@ -83,9 +83,13 @@ def main():
                     print("tada!")
                     currPerson.putKinship(relative, kc)
     
+    count = 0
     for case in cases:
         print(case.toString())
+        if(len(case.kinshipDict)<=0):
+            count+=1
         
+    print("Number of unmatched cases %d" %(count))
 
 
 
