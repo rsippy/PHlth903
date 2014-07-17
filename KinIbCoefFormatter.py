@@ -10,17 +10,14 @@ import subprocess
 import shutil
 import random
 
-idDict = dict()
-famDict = dict()
-
-
-class idTranslator(object):
-    def __init__(self, haveZero):
+###############################################################################
+#idTable -   a data structure that takes string IDs and gives each unique string
+#            ID an integer ID
+class idTable(object):
+    def __init__(self):
         self.sID2iID = dict()
         self.iID2sID = dict()
         self.count = 0
-        if(haveZero):
-            self.put("0", 0)
         
     def put(self, sID, iID):
         self.sID2iID.update({sID : iID})
@@ -37,9 +34,12 @@ class idTranslator(object):
             return(self.iID2sID.get(iID))
         else:
             return(None)
-        
-_indDict = idTranslator(True)
-_famDict = idTranslator(True)
+
+#Create idTables        
+indDict = idTable()
+indDict.put("0", 0)
+famDict = idTable()
+famDict.put("0", 0)
 
 def main():
     if(len(sys.argv)!=2):
@@ -47,7 +47,6 @@ def main():
               "e.g. python KinIbCoefFormatter /dir/pedFile")
 
     pedFilePath = sys.argv[1]
-    outputFilePath = os.getcwd()
     currentWorkingDir = os.getcwd()
     tempDir = currentWorkingDir + "/KIC_TEMP/"
     while(os.path.exists(tempDir)):
@@ -59,77 +58,43 @@ def main():
     KICoutFilepath = tempDir + "TEMP_KIC_out"
     KICpedFile = open(KICpedFilepath, "w+")
     KIClistFile = open(KIClistFilepath, "w+")
-    idDict.update({"0":"0"})
-    famDict.update({"0":"0"})
-    #indDict = idTranslator(True)
-    #famDict = idTranslator(True)
     
     #skip header
     next(pedFile)
-    #make new formatted files
+    
+    #prepare files for KIC
     for line in pedFile:
         lineData = line.strip().split(",")
-        #lineData[0] = convertFamID(lineData[0])
-        lineData[0] = str(_famDict.getIID(lineData[0]))
+        lineData[0] = str(famDict.getIID(lineData[0]))
         convertLD(lineData)
         KICpedFile.write(" ".join(lineData[0:4])+"\n")
         KIClistFile.write(" ".join(lineData[0:2])+"\n")
     
-    #close files
+    #close files & run KIC
     pedFile.close()
     KICpedFile.close()
     KIClistFile.close()
+    subprocess.call(["/project/EngelmanGroup/GAW19/KinInbcoef/./KinInbcoef",
+                     KICpedFilepath, KIClistFilepath, KICoutFilepath])
     
-    #run KIB
-    subprocess.call(["/project/EngelmanGroup/GAW19/KinInbcoef/./KinInbcoef",KICpedFilepath,KIClistFilepath,KICoutFilepath])
-    
+    #convert KIC output
     KICoutFile = open(KICoutFilepath)
     outFile = open(currentWorkingDir + "/KIC_out", "w+")
     for line in KICoutFile:
         lineData = line.strip().split(" ")
-        print("%s\t%s\t%s\t%s"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(int(lineData[1])), _indDict.getSID(int(lineData[2])), lineData[3]))
-        outFile.write("%s\t%s\t%s\t%s\n"  %(_famDict.getSID(int(lineData[0])), _indDict.getSID(int(lineData[1])), _indDict.getSID(int(lineData[2])), lineData[3]))
+        outFile.write("%s,%s,%s,%s\n"  %(famDict.getSID(int(lineData[0])), 
+                                         indDict.getSID(int(lineData[1])), 
+                                         indDict.getSID(int(lineData[2])), 
+                                         lineData[3]))
+    
+    #cleanup
     KICoutFile.close()
     outFile.close()
-    
-    #delete temp dir
-    #os.remove(KIClistFilepath)
-    #os.remove(KICoutFilepath)
-    #os.remove(KICpedFilepath)
-    #os.rmdir(tempDir)
     shutil.rmtree(tempDir +"/", True)
-
-'''
-def convertFamID(stringID):
-    x = _famDict.getIID(stringID)
-    if not(famDict.has_key(stringID)):
-        famDict.update({stringID : str(len(famDict))})
-    y = famDict.get(stringID)
-    print(str(x) + "|" + str(y))
-    #return(famDict.get(stringID))
-    return(str(x))
-    
-
-def convert2intID(stringID):
-    
-    x = _indDict.getIID(stringID)
-    return(str(x))
-    if(len(stringID)>1):
-        intID = str(int(stringID[5:]))
-        if not(idDict.has_key(intID)):
-            idDict.update({intID : str(len(idDict))})
-            y = idDict.get(intID)
-            print(str(x) + "|" + str(y))
-        return idDict.get(intID)
-    else:
-        y = stringID
-        print(str(x) + "|" + str(y))
-        return stringID
-'''
 
 def convertLD(lineData):
     for i in xrange(1,4):
-        lineData[i] = str(_indDict.getIID(lineData[i]))
+        lineData[i] = str(indDict.getIID(lineData[i]))
 
 if __name__ == '__main__':
     main()
