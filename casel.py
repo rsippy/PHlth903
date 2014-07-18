@@ -6,6 +6,7 @@ Created on Jul 3, 2014
 import sys
 import os
 from sets import Set as set
+import math
 import itertools
 
 class Person(object):
@@ -70,11 +71,12 @@ def main():
         contData = contData.strip().split("\t")
         #print(contData)
         contID = contData[1]
+        contResid = math.fabs(float(contData[3]))
         print("cont: %s" %(contID))
         cont = Person(contID)
         people.update({contID : cont})
         controls.append(case)
-        controlsResidMap.update({contData[3] : cont})
+        controlsResidMap.update({contResid : cont})
     contFile.close()
     print(len(controls))
     numberOfControls = numberOfControls if (len(controls)>=numberOfControls) else len(controls)
