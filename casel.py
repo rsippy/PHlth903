@@ -99,7 +99,7 @@ def main():
     print("Number of zero-matched cases %d" %(count))
        
     goodControls = 0
-    for person in people:
+    for person in people.itervalues():
         if(person.isRelated):
             goodControls += 1
     print("Number of good controls %d" %(goodControls))
