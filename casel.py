@@ -12,6 +12,7 @@ class Person(object):
     def __init__(self, caseID):
         self.id = caseID
         self.kinshipDict = dict()
+        self.isRelated = False
     
     def putKinship(self, relative, kinshipCoefficient):
         if not(self.kinshipDict.get(kinshipCoefficient)):
@@ -26,6 +27,7 @@ class Person(object):
             tempString = "\n" + str(kc) + ":"
             for relative in relativesWithGivenKC:
                 tempString += relative.id + ","
+                relative.isRelated = True
             outString += tempString[:-1]
         return(outString)
                 
@@ -95,14 +97,19 @@ def main():
             count+=1
         
     print("Number of zero-matched cases %d" %(count))
+       
+    goodControls = 0
+    for person in people:
+        if(person.isRelated):
+            goodControls += 1
+    print("Number of good controls %d" %(goodControls))
     
     print("Finding %d controls" %(numberOfControls))
-    #combIndex = list()
-    
+    #combIndex = list()   
     controlCombos = itertools.combinations(controls, numberOfControls)
     
-    for _ in controlCombos:
-        1
+    #for _ in controlCombos:
+    #    1
 
 
 
