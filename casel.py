@@ -114,7 +114,7 @@ def main():
     print("Number of good controls %d" %(goodControls))
     
     if(goodControls < numberOfControls):
-        for resid,person in controlsResidMap.iteritems():
+        for resid,person in sorted(controlsResidMap.iteritems()):
             print(resid)
             print(person.id)
     
