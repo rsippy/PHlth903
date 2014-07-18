@@ -14,6 +14,7 @@ class Person(object):
         self.id = caseID
         self.kinshipDict = dict()
         self.isRelated = False
+        self.numRel = 0
     
     def putKinship(self, relative, kinshipCoefficient):
         if not(self.kinshipDict.get(kinshipCoefficient)):
@@ -21,6 +22,8 @@ class Person(object):
         relativesWithGivenKC = self.kinshipDict.get(kinshipCoefficient)
         relativesWithGivenKC.add(relative)
         self.kinshipDict.update({kinshipCoefficient : relativesWithGivenKC})
+        self.relative.isRelated = True
+        self.numRel += 1
     
     def toString(self):
         outString = self.id
@@ -61,7 +64,7 @@ def main():
         people.update({caseID : case})
         cases.append(case)
     caseFile.close()
-    numberOfControls = len(cases)*numberOfControlsPerCase
+    neededControls = len(cases)*numberOfControlsPerCase
     
     #load controls
     contFile = open(contFilepath)
@@ -79,7 +82,7 @@ def main():
         controlsResidMap.update({contResid : cont})
     contFile.close()
     print(len(controls))
-    numberOfControls = numberOfControls if (len(controls)>=numberOfControls) else len(controls)
+    neededControls = neededControls if (len(controls)>=neededControls) else len(controls)
     
     #load KIC info
     KICoutFile = open(KICoutFilepath)
@@ -99,10 +102,17 @@ def main():
                     currPerson.putKinship(relative, kc)
     
     count = 0
+    caseRelCount = dict()
     for case in cases:
         print(case.toString())
         if(len(case.kinshipDict)<=0):
             count+=1
+        if not(caseRelCount.has_key(case.numRel)):
+            caseRelCount.update({case.numRel : 0})
+        caseRelCount.update({case.numRel : caseRelCount.get(case.numRel)+1})
+    
+    print(caseRelCount)
+        
         
     print("Number of zero-matched cases %d" %(count))
        
@@ -110,24 +120,22 @@ def main():
     for person in people.itervalues():
         if(person.isRelated):
             goodControlsList.append(person)
-    goodControls = len(goodControlsList)
-    print("Number of good controls %d" %(goodControls))
+    numGoodControls = len(goodControlsList)
+    print("Number of good controls %d" %(numGoodControls))
     
-    if(goodControls < numberOfControls):
+    if(numGoodControls < neededControls):
         for resid,person in sorted(controlsResidMap.iteritems()):
             if not(person in goodControlsList):
                 goodControlsList.append(person)
-            #print(resid)
-            #print(person.id)
-            if(len(goodControlsList) >= numberOfControls):
+            if(len(goodControlsList) >= neededControls):
                 break
         #print(goodControlsList)
         for person in goodControlsList:
             print(person.id)
     else:
-        print("Finding %d controls" %(numberOfControls))
+        print("Finding %d controls" %(neededControls))
         #combIndex = list()   
-        controlCombos = itertools.combinations(controls, numberOfControls)
+        controlCombos = itertools.combinations(controls, neededControls)
         
         #for _ in controlCombos:
         #    1
