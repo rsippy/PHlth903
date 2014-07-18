@@ -15,6 +15,7 @@ class Person(object):
         self.kinshipDict = dict()
         self.isRelated = False
         self.numRel = 0
+        self.relatedTo = list()
     
     def putKinship(self, relative, kinshipCoefficient):
         if not(self.kinshipDict.get(kinshipCoefficient)):
@@ -23,6 +24,7 @@ class Person(object):
         relativesWithGivenKC.add(relative)
         self.kinshipDict.update({kinshipCoefficient : relativesWithGivenKC})
         self.isRelated = True
+        self.relatedTo.append(relative)
         self.numRel += 1
     
     def toString(self):
@@ -117,6 +119,10 @@ def main():
        
     goodControlsList = list()
     for person in controls:
+        for relative in person.relatedTo:
+            if(relative in cases):
+                goodControlsList.append(person)
+                break
         if(person.isRelated):
             goodControlsList.append(person)
     numGoodControls = len(goodControlsList)
