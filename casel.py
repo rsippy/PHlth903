@@ -26,6 +26,7 @@ class Person(object):
         self.isRelated = True
         self.relatedTo.append(relative)
         self.numRel += 1
+        relative.putKinship(self, kinshipCoefficient)
     
     def toString(self):
         outString = self.id
@@ -123,8 +124,8 @@ def main():
             if(relative in cases):
                 goodControlsList.append(person)
                 break
-        if(person.isRelated):
-            goodControlsList.append(person)
+        #if(person.isRelated):
+        #    goodControlsList.append(person)
     numGoodControls = len(goodControlsList)
     print("Number of good controls %d" %(numGoodControls))
     
