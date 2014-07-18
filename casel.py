@@ -55,7 +55,7 @@ def main():
         print("case: %s" %(caseID))
         case = Person(caseID)
         people.update({caseID : case})
-        cases.add(case)
+        cases.append(case)
     caseFile.close()
     numberOfControls = len(cases)*numberOfControlsPerCase
     
