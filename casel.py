@@ -121,14 +121,16 @@ def main():
             #print(person.id)
             if(len(goodControlsList) >= numberOfControls):
                 break
-        print(goodControlsList)
-    
-    print("Finding %d controls" %(numberOfControls))
-    #combIndex = list()   
-    controlCombos = itertools.combinations(controls, numberOfControls)
-    
-    #for _ in controlCombos:
-    #    1
+        #print(goodControlsList)
+        for person in goodControlsList:
+            print(person.id)
+    else:
+        print("Finding %d controls" %(numberOfControls))
+        #combIndex = list()   
+        controlCombos = itertools.combinations(controls, numberOfControls)
+        
+        #for _ in controlCombos:
+        #    1
 
 
 
