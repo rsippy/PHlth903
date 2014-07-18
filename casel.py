@@ -22,7 +22,7 @@ class Person(object):
         relativesWithGivenKC = self.kinshipDict.get(kinshipCoefficient)
         relativesWithGivenKC.add(relative)
         self.kinshipDict.update({kinshipCoefficient : relativesWithGivenKC})
-        self.relative.isRelated = True
+        self.isRelated = True
         self.numRel += 1
     
     def toString(self):
@@ -31,7 +31,7 @@ class Person(object):
             tempString = "\n" + str(kc) + ":"
             for relative in relativesWithGivenKC:
                 tempString += relative.id + ","
-                relative.isRelated = True
+                #relative.isRelated = True
             outString += tempString[:-1]
         return(outString)
                 
