@@ -6,6 +6,7 @@ Created on Jul 3, 2014
 import sys
 import os
 from sets import Set as set
+from timeit import itertools
 
 class Person(object):
     def __init__(self, caseID):
@@ -40,6 +41,7 @@ def main():
     people = dict()
     cases = set()
     controls = set()
+    numberOfControlsPerCase = 2
 
     currDir = os.path.dirname(os.path.realpath(__file__))
     KICoutFilepath = sys.argv[1]
@@ -55,6 +57,7 @@ def main():
         people.update({caseID : case})
         cases.add(case)
     caseFile.close()
+    numberOfControls = len(cases)*numberOfControlsPerCase
     
     #load controls
     contFile = open(contFilepath)
@@ -65,6 +68,7 @@ def main():
         people.update({contID : cont})
         controls.add(case)
     contFile.close()
+    numberOfControls = numberOfControls if (len(controls)>=numberOfControls) else len(controls)
     
     #load KIC info
     KICoutFile = open(KICoutFilepath)
@@ -89,7 +93,13 @@ def main():
         if(len(case.kinshipDict)<=0):
             count+=1
         
-    print("Number of unmatched cases %d" %(count))
+    print("Number of zero-matched cases %d" %(count))
+    
+    print("Finding %d controls" %(numberOfControls))
+    #combIndex = list()
+    
+    for i in itertools.combinations(controls, numberOfControls):
+        print(i)
 
 
 
