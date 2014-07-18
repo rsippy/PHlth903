@@ -100,9 +100,10 @@ def main():
     #combIndex = list()
     
     controlCombos = itertools.combinations(controls, numberOfControls)
+    print(len(controlCombos))
     
     for _ in controlCombos:
-        print(_)
+        1
 
 
 
