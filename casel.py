@@ -68,6 +68,7 @@ def main():
         people.update({contID : cont})
         controls.add(case)
     contFile.close()
+    print(len(controls))
     numberOfControls = numberOfControls if (len(controls)>=numberOfControls) else len(controls)
     
     #load KIC info
