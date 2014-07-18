@@ -67,7 +67,9 @@ def main():
     contFile = open(contFilepath)
     next(contFile)
     for contData in contFile:
-        contData = contData.strip().split(" ")
+        print(contData)
+        contData = contData.strip().split("\t")
+        print(contData)
         contID = contData[1]
         print("cont: %s" %(contID))
         cont = Person(contID)
