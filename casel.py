@@ -39,7 +39,7 @@ def main():
     #map IDs to people / sets that are pointers to people that are either cases
     #or controls
     people = dict()
-    cases = set()
+    cases = list()
     controls = list()
     numberOfControlsPerCase = 2
 
@@ -66,7 +66,7 @@ def main():
         print("cont: %s" %(contID))
         cont = Person(contID)
         people.update({contID : cont})
-        controls.add(case)
+        controls.append(case)
     contFile.close()
     print(len(controls))
     numberOfControls = numberOfControls if (len(controls)>=numberOfControls) else len(controls)
