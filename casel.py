@@ -43,6 +43,8 @@ def main():
     people = dict()
     cases = list()
     controls = list()
+    controlsRelated = list()
+    controlsResidMap = dict()
     numberOfControlsPerCase = 2
 
     currDir = os.path.dirname(os.path.realpath(__file__))
@@ -63,12 +65,15 @@ def main():
     
     #load controls
     contFile = open(contFilepath)
-    for contID in contFile:
-        contID = contID.strip()
+    next(contFile)
+    for contData in contFile:
+        contData = contData.strip().split(" ")
+        contID = contData[1]
         print("cont: %s" %(contID))
         cont = Person(contID)
         people.update({contID : cont})
         controls.append(case)
+        controlsResidMap.update({contData[3] : cont})
     contFile.close()
     print(len(controls))
     numberOfControls = numberOfControls if (len(controls)>=numberOfControls) else len(controls)
