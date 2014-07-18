@@ -40,7 +40,7 @@ def main():
     #or controls
     people = dict()
     cases = set()
-    controls = set()
+    controls = list()
     numberOfControlsPerCase = 2
 
     currDir = os.path.dirname(os.path.realpath(__file__))
@@ -79,13 +79,13 @@ def main():
         currPersonID = lineData[1]
         if(people.has_key(currPersonID)):
             currPerson = people.get(currPersonID)
-            print("person exists")
+            #print("person exists")
             relativeID = lineData[2]
             if(people.has_key(relativeID)):
                 relative = people.get(relativeID)
                 kc = float(lineData[3])
                 if(kc > 0):
-                    print("tada!")
+                    #print("tada!")
                     currPerson.putKinship(relative, kc)
     
     count = 0
