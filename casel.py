@@ -31,7 +31,6 @@ class Person(object):
             tempString = "\n" + str(kc) + ":"
             for relative in relativesWithGivenKC:
                 tempString += relative.id + ","
-                #relative.isRelated = True
             outString += tempString[:-1]
         return(outString)
                 
@@ -117,7 +116,7 @@ def main():
     print("Number of zero-matched cases %d" %(count))
        
     goodControlsList = list()
-    for person in people.itervalues():
+    for person in controls:
         if(person.isRelated):
             goodControlsList.append(person)
     numGoodControls = len(goodControlsList)
