@@ -115,8 +115,13 @@ def main():
     
     if(goodControls < numberOfControls):
         for resid,person in sorted(controlsResidMap.iteritems()):
-            print(resid)
-            print(person.id)
+            if not(person in goodControlsList):
+                goodControlsList.append(person)
+            #print(resid)
+            #print(person.id)
+            if(len(goodControlsList) >= numberOfControls):
+                break
+        print(goodControlsList)
     
     print("Finding %d controls" %(numberOfControls))
     #combIndex = list()   
