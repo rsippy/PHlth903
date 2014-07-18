@@ -43,7 +43,6 @@ def main():
     people = dict()
     cases = list()
     controls = list()
-    controlsRelated = list()
     controlsResidMap = dict()
     numberOfControlsPerCase = 2
 
@@ -67,9 +66,9 @@ def main():
     contFile = open(contFilepath)
     next(contFile)
     for contData in contFile:
-        print(contData)
+        #print(contData)
         contData = contData.strip().split("\t")
-        print(contData)
+        #print(contData)
         contID = contData[1]
         print("cont: %s" %(contID))
         cont = Person(contID)
@@ -105,11 +104,17 @@ def main():
         
     print("Number of zero-matched cases %d" %(count))
        
-    goodControls = 0
+    goodControlsList = list()
     for person in people.itervalues():
         if(person.isRelated):
-            goodControls += 1
+            goodControlsList.append(person)
+    goodControls = len(goodControlsList)
     print("Number of good controls %d" %(goodControls))
+    
+    if(goodControls < numberOfControls):
+        for resid,person in controlsResidMap.iteritems():
+            print(resid)
+            print(person.id)
     
     print("Finding %d controls" %(numberOfControls))
     #combIndex = list()   
