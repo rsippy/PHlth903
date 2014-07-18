@@ -6,7 +6,7 @@ Created on Jul 3, 2014
 import sys
 import os
 from sets import Set as set
-from timeit import itertools
+import itertools
 
 class Person(object):
     def __init__(self, caseID):
@@ -98,8 +98,10 @@ def main():
     print("Finding %d controls" %(numberOfControls))
     #combIndex = list()
     
-    for i in itertools.combinations(controls, numberOfControls):
-        print(i)
+    controlCombos = itertools.combinations(controls, numberOfControls)
+    
+    for _ in controlCombos:
+        print(_)
 
 
 
