@@ -7,26 +7,24 @@ import sys
 import os
 from sets import Set as set
 import math
-import itertools
+from munkres import Munkres
+import munkres
 
 class Person(object):
     def __init__(self, caseID):
         self.id = caseID
         self.kinshipDict = dict()
-        self.isRelated = False
-        self.numRel = 0
-        self.relatedTo = list()
+        self.relatedTo = dict()
     
-    def putKinship(self, relative, kinshipCoefficient):
+    def putKinship(self, relative, kinshipCoefficient, recurs=True):
         if not(self.kinshipDict.get(kinshipCoefficient)):
             self.kinshipDict.update({kinshipCoefficient : set()})
         relativesWithGivenKC = self.kinshipDict.get(kinshipCoefficient)
         relativesWithGivenKC.add(relative)
         self.kinshipDict.update({kinshipCoefficient : relativesWithGivenKC})
-        self.isRelated = True
-        self.relatedTo.append(relative)
-        self.numRel += 1
-        relative.putKinship(self, kinshipCoefficient)
+        self.relatedTo.update({relative : kinshipCoefficient})
+        if(recurs):
+            relative.putKinship(self, kinshipCoefficient, False)
     
     def toString(self):
         outString = self.id
@@ -36,13 +34,16 @@ class Person(object):
                 tempString += relative.id + ","
             outString += tempString[:-1]
         return(outString)
+
+    def numRel(self):
+        return(len(self.relatedTo))
                 
             
 def main():
-    if(len(sys.argv)!=2):
-        print("incorrect usage - KinIbCoefFormatter needs one parameter\n"+
-              "e.g. python casel /dir/KICout")
-        exit(0)
+    #if(len(sys.argv)!=2):
+    #    print("incorrect usage - KinIbCoefFormatter needs one parameter\n"+
+    #          "e.g. python casel /dir/KICout")
+    #    exit(0)
     
     #map IDs to people / sets that are pointers to people that are either cases
     #or controls
@@ -53,7 +54,8 @@ def main():
     numberOfControlsPerCase = 2
 
     currDir = os.path.dirname(os.path.realpath(__file__))
-    KICoutFilepath = sys.argv[1]
+    #KICoutFilepath = sys.argv[1]
+    KICoutFilepath = currDir + "/KIC_out"
     caseFilepath = currDir + "/cases"
     contFilepath = currDir + "/controls"
     
@@ -61,7 +63,6 @@ def main():
     caseFile = open(caseFilepath)
     for caseID in caseFile:
         caseID = caseID.strip()
-        print("case: %s" %(caseID))
         case = Person(caseID)
         people.update({caseID : case})
         cases.append(case)
@@ -72,19 +73,18 @@ def main():
     contFile = open(contFilepath)
     next(contFile)
     for contData in contFile:
-        #print(contData)
         contData = contData.strip().split("\t")
-        #print(contData)
         contID = contData[1]
         contResid = math.fabs(float(contData[3]))
-        print("cont: %s" %(contID))
         cont = Person(contID)
         people.update({contID : cont})
-        controls.append(case)
+        controls.append(cont)
         controlsResidMap.update({contResid : cont})
     contFile.close()
-    print(len(controls))
+    #print(len(controls))
     neededControls = neededControls if (len(controls)>=neededControls) else len(controls)
+    
+    print("%d cases and %d potential controls" %(len(cases), len(controls)))
     
     #load KIC info
     KICoutFile = open(KICoutFilepath)
@@ -94,58 +94,92 @@ def main():
         currPersonID = lineData[1]
         if(people.has_key(currPersonID)):
             currPerson = people.get(currPersonID)
-            #print("person exists")
             relativeID = lineData[2]
             if(people.has_key(relativeID)):
                 relative = people.get(relativeID)
                 kc = float(lineData[3])
                 if(kc > 0):
-                    #print("tada!")
                     currPerson.putKinship(relative, kc)
     
     count = 0
     caseRelCount = dict()
     for case in cases:
-        print(case.toString())
+        caseNumRel = case.numRel()
         if(len(case.kinshipDict)<=0):
             count+=1
-        if not(caseRelCount.has_key(case.numRel)):
-            caseRelCount.update({case.numRel : 0})
-        caseRelCount.update({case.numRel : caseRelCount.get(case.numRel)+1})
-    
-    print(caseRelCount)
+        if not(caseRelCount.has_key(caseNumRel)):
+            caseRelCount.update({caseNumRel : 0})
+        caseRelCount.update({caseNumRel : caseRelCount.get(caseNumRel)+1})
         
-        
-    print("Number of zero-matched cases %d" %(count))
+    print("Cases to Number of Related Controls: " + str(caseRelCount))
+    print("Number of zero-matched cases: %d" %(caseRelCount.get(0)))
        
-    goodControlsList = list()
+    goodControls = list()
     for person in controls:
         for relative in person.relatedTo:
             if(relative in cases):
-                goodControlsList.append(person)
+                goodControls.append(person)
                 break
-        #if(person.isRelated):
-        #    goodControlsList.append(person)
-    numGoodControls = len(goodControlsList)
-    print("Number of good controls %d" %(numGoodControls))
+    print("Number of good controls: %d" %(len(goodControls)))
     
-    if(numGoodControls < neededControls):
-        for resid,person in sorted(controlsResidMap.iteritems()):
-            if not(person in goodControlsList):
-                goodControlsList.append(person)
-            if(len(goodControlsList) >= neededControls):
-                break
-        #print(goodControlsList)
-        for person in goodControlsList:
-            print(person.id)
+    manyControls = False
+    if(len(goodControls) > neededControls):
+        manyControls = True
+        print("Have too many good controls - need to trim down number of controls by modified Hungarian Assignment")
+        selectedControls = hungarianAssignment(cases, controls, numberOfControlsPerCase)
     else:
-        print("Finding %d controls" %(neededControls))
-        #combIndex = list()   
-        controlCombos = itertools.combinations(controls, neededControls)
-        
-        #for _ in controlCombos:
-        #    1
+        print("Have too few good controls - using all of them")
+        selectedControls = goodControls
+    
+    #if we don't have enough good controls take all related controls and add 
+    #min resid controls
+    if(len(selectedControls) < neededControls):
+        print("Number of selected controls (%d) < number of needed controls (%d) - adding min resid controls" %((len(selectedControls),neededControls )))
+        for resid,person in sorted(controlsResidMap.iteritems()):
+            if((not manyControls) or (person in goodControls)):
+                if not(person in selectedControls):
+                    selectedControls.append(person)
+                if(len(selectedControls) >= neededControls):
+                    break
+  
+    #print selected controls
+    print("\nFinal Control Selection (KIC = %f):" %kicScore(cases, selectedControls))
+    for person in selectedControls:
+        print(person.id)
+    #print("Final KIC score: %d" %kicScore(cases, selectedControls))
 
+def hungarianAssignment(cases, controls, numberOfControlsPerCase):
+    selectedControls = list()
+    convFactor =100000.00
+    m = list()
+    for control in controls:
+        row = list()
+        for _ in xrange(numberOfControlsPerCase):
+            row += [(control.relatedTo.get(case) if (control.relatedTo.has_key(case)) else 0) for case in cases]
+        m.append(row)
+    cm = munkres.make_cost_matrix(m, lambda cost:convFactor-cost*convFactor)
+    matrix = cm
+    m = Munkres()
+    indexes = m.compute(matrix)
+    total = 0
+    for row, column in indexes:
+        value = matrix[row][column]
+        total += value
+        if(value < convFactor):
+            selectedControls.append(controls[row%len(controls)])
+    print('\tassignment kic score: %f' %(float(len(indexes)*convFactor-total)/convFactor))
+    print("\tall kic score: %f" %(kicScore(cases, selectedControls)))
+    return(selectedControls)
+
+def kicScore(cases, controlList):
+    score = 0
+    for control in controlList:
+        related = control.relatedTo 
+        for case in cases:
+            if(related.has_key(case)):
+                score += related.get(case)
+    return(score)
+        
 
 
 if __name__ == '__main__':
