@@ -99,17 +99,17 @@ def main():
             #print(lineData[2])
             #print(lineData[823])
             #print(lineData[824])
-        mapFile.close()
-        SNPFile = open(SNPFilePath, "w+")
-        for snpList,gene in geneMap.iteritems():
-            geneString = str(gene) + "\t0"
-            #SNPFile.write(gene + "\t0")
-            for snp in snpList:
-                geneString += "\t" + snp
-                #SNPFile.write("\t" + snp)
-            geneString + "\n"
-            SNPFile.write(geneString)
-        SNPFile.close()
+    mapFile.close()
+    SNPFile = open(SNPFilePath, "w+")
+    for snpList,gene in geneMap.iteritems():
+        geneString = str(gene) + "\t0"
+        #SNPFile.write(gene + "\t0")
+        for snp in snpList:
+            geneString += "\t" + snp
+            #SNPFile.write("\t" + snp)
+        geneString + "\n"
+        SNPFile.write(geneString)
+    SNPFile.close()
     
     
     #Kinship file
