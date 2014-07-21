@@ -86,6 +86,7 @@ def main():
         newLine[0] = str(famDict.getIID(lineData[0]))
         newLine[1] = str(indDict.getIID(lineData[1]))
         newLine[2] = str(indDict.getIID(lineData[2]))
+        print(newLine)
         kinFile.write("\t".join(newLine) + "\n")
     KICFile.close()
     kinFile.close()
