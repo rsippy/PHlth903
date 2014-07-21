@@ -104,6 +104,8 @@ def main():
     for gene,snpList in geneMap.iteritems():
         geneString = str(gene) + "\t0"
         #SNPFile.write(gene + "\t0")
+        if(len(snpList)>1):
+            print(snpList)
         for snp in snpList:
             geneString += "\t" + snp
             #SNPFile.write("\t" + snp)
