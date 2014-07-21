@@ -84,10 +84,10 @@ def main():
         for i,data in enumerate(lineData):
             if(data == "3_60363"):
                 print("!!!!!!!" + str(i))
-        if(len(lineData) != 823):
-            print(len(lineData))
-            print(lineData[0])
-            print(lineData[823])
+        #if(len(lineData) != 823):
+        #    print(len(lineData))
+        #    print(lineData[0])
+        #    print(lineData[823])
             #print(lineData[824])
     
     
