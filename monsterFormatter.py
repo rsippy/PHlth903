@@ -27,7 +27,7 @@ def main():
     phenoFilePath = currentWorkingDir + "/pheno.txt"
     doseFilePath = "/project/EngelmanGroup/GAW19/GAW19_data/Family Data Set/Genotype Files/DOSE/chr3-dose.csv/chr3-dose.csv"
     genFilePath = currentWorkingDir + "/geno.txt"
-    KICFilePath = currentWorkingDir + "KIC_out"
+    KICFilePath = "/home/o/otles/KIC_out"
     kinFilePath = currentWorkingDir + "/kin.txt"
     
     
