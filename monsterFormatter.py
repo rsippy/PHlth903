@@ -95,7 +95,6 @@ def main():
     for line in KICFile:
         lineData = line.strip().split(",")
         if(lineData[1] in selected and lineData[2] in selected):
-            print(lineData)
             lineData[0] = str(famDict.getIID(lineData[0]))
             lineData[1] = str(indDict.getIID(lineData[1]))
             lineData[2] = str(indDict.getIID(lineData[2]))
