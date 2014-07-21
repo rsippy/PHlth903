@@ -79,19 +79,31 @@ def main():
     print(doseList)
     
     #SNP map file
+    geneMap = dict()
     print("Creating SNP file")
     mapFile = open(mapFilePath)
-    SNPFile = open(SNPFilePath, "w+")
     next(mapFile)
     for line in mapFile:
         lineData = line.strip().split("\t")
-        tmpSNP = lineData[1] + "_" + lineData[2]
-        print(lineData[1] + "_" + lineData[2] + str(tmpSNP in doseList))
+        #tmpSNP = lineData[1] + "_" + lineData[2]
+        #print(lineData[1] + "_" + lineData[2] + str(tmpSNP in doseList))
         if(len(lineData) != 823):
-            print(len(lineData))
-            print(lineData[2])
-            print(lineData[823])
+            gene = lineData[823]
+            snp = lineData[1] + "_" + lineData[2]
+            if not(geneMap.has_key(snp)):
+                geneMap.update({gene : list()})
+            snpList = geneMap.get(gene)
+            snpList.append(snp)
+            geneMap.update({gene : snpList})
+            #print(len(lineData))
+            #print(lineData[2])
+            #print(lineData[823])
             #print(lineData[824])
+        mapFile.close()
+        SNPFile = open(SNPFilePath, "w+")
+        for snpList,gene in geneMap.iteritems():
+            SNPFile.write(gene + "\t" + "\t".join(snpList) + "\n")
+        SNPFile.close()
     
     
     #Kinship file
