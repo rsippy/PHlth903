@@ -82,6 +82,7 @@ def main():
     kinFile = open(kinFilePath, "w+")
     for line in KICFile:
         line = line.strip().split(",")
+        newLine = list()
         newLine = line
         print(line)
         newLine[0] = str(famDict.getIID(lineData[0]))
