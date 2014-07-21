@@ -76,7 +76,7 @@ def main():
     doseFile.close()
     genFile.close()
     
-    print(doseList)
+    #print(doseList)
     
     #SNP map file
     geneMap = dict()
@@ -102,7 +102,13 @@ def main():
         mapFile.close()
         SNPFile = open(SNPFilePath, "w+")
         for snpList,gene in geneMap.iteritems():
-            SNPFile.write(gene + "\t" + "\t".join(snpList) + "\n")
+            geneString = gene + "\t0"
+            #SNPFile.write(gene + "\t0")
+            for snp in snpList:
+                geneString += "\t" + snp
+                #SNPFile.write("\t" + snp)
+            geneString + "\n"
+            SNPFile.write(geneString)
         SNPFile.close()
     
     
