@@ -108,7 +108,7 @@ def main():
         for snp in snpList:
             geneString += "\t" + snp
             #SNPFile.write("\t" + snp)
-        geneString + "\n"
+        geneString += "\n"
         SNPFile.write(geneString)
     SNPFile.close()
     
