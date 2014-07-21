@@ -32,6 +32,7 @@ def main():
     KICFilePath = "/home/o/otles/KIC_out"
     kinFilePath = currentWorkingDir + "/kin.txt"
     
+    doseList = list()
     
     #phenotype file
     print("Creating phenotype file")
@@ -71,8 +72,11 @@ def main():
         if not(len(line)==799):  
             newLine = [line[col] for col in goodCols]
             genFile.write("\t".join(newLine) + "\n")
+            doseList.append(line[0])
     doseFile.close()
     genFile.close()
+    
+    print(doseList)
     
     #SNP map file
     print("Creating SNP file")
