@@ -82,14 +82,16 @@ def main():
     geneMap = dict()
     print("Creating SNP file")
     mapFile = open(mapFilePath)
+    SNPFile = open(SNPFilePath, "w+")
     next(mapFile)
+    currGene = ""
     for line in mapFile:
         lineData = line.strip().split("\t")
         #tmpSNP = lineData[1] + "_" + lineData[2]
         #print(lineData[1] + "_" + lineData[2] + str(tmpSNP in doseList))
         if(len(lineData) != 823):
-            gene = lineData[823]
-            snp = lineData[1] + "_" + lineData[2]
+            gene = str(lineData[823])
+            snp = str(lineData[1] + "_" + lineData[2])
             if not(geneMap.has_key(snp)):
                 geneMap.update({gene : list()})
             snpList = geneMap.get(gene)
@@ -100,7 +102,6 @@ def main():
             #print(lineData[823])
             #print(lineData[824])
     mapFile.close()
-    SNPFile = open(SNPFilePath, "w+")
     for snpList,gene in geneMap.iteritems():
         geneString = str(gene) + "\t0"
         #SNPFile.write(gene + "\t0")
