@@ -82,10 +82,12 @@ def main():
     kinFile = open(kinFilePath, "w+")
     for line in KICFile:
         lineData = line.strip().split(",")
-        lineData[0] = str(famDict.getIID(lineData[0]))
-        lineData[1] = str(indDict.getIID(lineData[1]))
-        lineData[2] = str(indDict.getIID(lineData[2]))
-        kinFile.write("\t".join(lineData) + "\n")
+        if(lineData[1] in selected and lineData[2] in selected):
+            print(lineData)
+            lineData[0] = str(famDict.getIID(lineData[0]))
+            lineData[1] = str(indDict.getIID(lineData[1]))
+            lineData[2] = str(indDict.getIID(lineData[2]))
+            kinFile.write("\t".join(lineData) + "\n")
     KICFile.close()
     kinFile.close()
             
