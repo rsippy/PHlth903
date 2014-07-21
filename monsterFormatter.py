@@ -92,11 +92,11 @@ def main():
         if(len(lineData) != 823):
             gene = str(lineData[823])
             snp = str(lineData[1] + "_" + lineData[2])
-            if not(geneMap.has_key(snp)):
+            if (geneMap.has_key(snp) == False):
                 geneMap.update({gene : list()})
-            snpList = geneMap.get(gene)
-            snpList.append(snp)
-            geneMap.update({gene : snpList})
+            #snpList = geneMap.get(gene)
+            #snpList.append(snp)
+            geneMap.update({gene : geneMap.get(gene).append(snp)})
             #print(len(lineData))
             #print(lineData[2])
             #print(lineData[823])
