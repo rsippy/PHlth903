@@ -83,6 +83,7 @@ def main():
         lineData = line.strip().split("\t")
         if(len(lineData) != 823):
             print(len(lineData))
+            print(lineData[0])
             print(lineData[823])
             #print(lineData[824])
     
