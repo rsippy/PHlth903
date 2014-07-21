@@ -32,6 +32,7 @@ def main():
     
     
     #phenotype file
+    print("Creating phenotype file")
     pedFile = open(pedFilePath)
     phenoFile = open(phenoFilePath, "w+")
     for line in pedFile:
@@ -50,6 +51,7 @@ def main():
     phenoFile.close()
     
     #genotypye file
+    print("Creating genotype file")
     doseFile = open(doseFilePath)
     genFile = open(genFilePath, "w+")
     header = next(doseFile).strip().split(",")
@@ -71,11 +73,13 @@ def main():
     genFile.close()
     
     #SNP map file
+    print("Creating SNP file")
     
     
     #Kinship file
+    print("Creating kinship file")
     KICFile = open(KICFilePath)
-    kinFile = open(kinFilePath)
+    kinFile = open(kinFilePath, "w+")
     for line in kinFile:
         line = line.strip().split(",")
         newLine = line
