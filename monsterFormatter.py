@@ -72,7 +72,7 @@ def main():
         if not(len(line)==799):  
             newLine = [line[col] for col in goodCols]
             genFile.write("\t".join(newLine) + "\n")
-            doseList.append(line[0][2:])
+            doseList.append(line[0])
     doseFile.close()
     genFile.close()
     
@@ -85,9 +85,8 @@ def main():
     next(mapFile)
     for line in mapFile:
         lineData = line.strip().split("\t")
-        for i,data in enumerate(lineData):
-            if(data in doseList):
-                print("!!!!!!!" + str(i))
+        tmpSNP = lineData[1] + "_" + lineData[2]
+        print(lineData[1] + "_" + lineData[2] + str(tmpSNP in doseList))
         if(len(lineData) != 823):
             print(len(lineData))
             print(lineData[2])
