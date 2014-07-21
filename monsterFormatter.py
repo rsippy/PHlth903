@@ -58,8 +58,9 @@ def main():
     for line in doseFile:
         line = line.strip().split(",")
         print(len(line))
-        newLine = [line[col] for col in goodCols]
-        genFile.write("\t".join(newLine) + "\n")
+        if not(len(line)==799):
+            newLine = [line[col] for col in goodCols]
+            genFile.write("\t".join(newLine) + "\n")
     doseFile.close()
     genFile.close()
             
