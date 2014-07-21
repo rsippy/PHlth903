@@ -81,6 +81,9 @@ def main():
     next(mapFile)
     for line in mapFile:
         lineData = line.strip().split("\t")
+        for i,data in enumerate(lineData):
+            if(data == "3_60363"):
+                print("!!!!!!!" + str(i))
         if(len(lineData) != 823):
             print(len(lineData))
             print(lineData[0])
