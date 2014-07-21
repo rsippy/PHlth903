@@ -80,7 +80,7 @@ def main():
     print("Creating kinship file")
     KICFile = open(KICFilePath)
     kinFile = open(kinFilePath, "w+")
-    for line in kinFile:
+    for line in KICFile:
         line = line.strip().split(",")
         newLine = line
         newLine[0] = str(famDict.getIID(lineData[0]))
