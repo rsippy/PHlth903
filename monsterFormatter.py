@@ -57,7 +57,7 @@ def main():
     genFile.write("\t".join(newHeader) + "\n")
     for line in doseFile:
         line = line.strip().split(",")
-        print(line)
+        print(len(line))
         newLine = [line[col] for col in goodCols]
         genFile.write("\t".join(newLine) + "\n")
     doseFile.close()
