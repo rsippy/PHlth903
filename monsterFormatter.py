@@ -83,6 +83,7 @@ def main():
     for line in KICFile:
         line = line.strip().split(",")
         newLine = line
+        print(line)
         newLine[0] = str(famDict.getIID(lineData[0]))
         newLine[1] = str(indDict.getIID(lineData[1]))
         newLine[2] = str(indDict.getIID(lineData[2]))
