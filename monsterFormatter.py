@@ -28,7 +28,7 @@ def main():
     doseFilePath = "/project/EngelmanGroup/GAW19/GAW19_data/Family Data Set/Genotype Files/DOSE/chr3-dose.csv/chr3-dose.csv"
     genFilePath = currentWorkingDir + "/geno.txt"
     mapFilePath = "/project/EngelmanGroup/GAW19/chr3genoMAPPED.txt"
-    SNPFilePath = currentWorkingDir + "SNP.txt"
+    SNPFilePath = currentWorkingDir + "/SNP.txt"
     KICFilePath = "/home/o/otles/KIC_out"
     kinFilePath = currentWorkingDir + "/kin.txt"
     
@@ -77,7 +77,7 @@ def main():
     #SNP map file
     print("Creating SNP file")
     mapFile = open(mapFilePath)
-    SNPFile = open(SNPFilePath)
+    SNPFile = open(SNPFilePath, "w+")
     for line in mapFile:
         lineData = line.strip().split("\t")
         print([lineData[i] for i in [0,1,2,3,4,5,6,7,823,824,825]])
