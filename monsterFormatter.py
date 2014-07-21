@@ -80,7 +80,7 @@ def main():
     SNPFile = open(SNPFilePath, "w+")
     for line in mapFile:
         lineData = line.strip().split("\t")
-        print([lineData[i] for i in [0,1,2,3,4,5,6,7,823,824,825]])
+        print([lineData[i] for i in [0,1,2,3,4,5,6,7,823,824]])
     
     
     #Kinship file
