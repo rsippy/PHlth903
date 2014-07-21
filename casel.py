@@ -147,6 +147,8 @@ def main():
     for person in selectedControls:
         print(person.id)
     #print("Final KIC score: %d" %kicScore(cases, selectedControls))
+    print([person.id for person in cases])
+    print([person.id for person in selectedControls])
 
 def hungarianAssignment(cases, controls, numberOfControlsPerCase):
     selectedControls = list()
