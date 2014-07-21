@@ -81,7 +81,7 @@ def main():
     next(mapFile)
     for line in mapFile:
         lineData = line.strip().split("\t")
-        #print(len(lineData))
+        print(len(lineData))
         print(lineData[823])
     
     
