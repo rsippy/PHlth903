@@ -25,6 +25,8 @@ def main():
     currentWorkingDir = os.getcwd()
     pedFilePath = currentWorkingDir + "/PED.csv"
     phenoFilePath = currentWorkingDir + "/pheno.txt"
+    doseFilePath = "/project/EngelmanGroup/GAW19/GAW19_data/Family\ Data\ Set/Genotype\ Files/DOSE/chr3-dose.csv/chr3-dose.csv"
+    genFilePath = currentWorkingDir + "/geno.txt"
     
     pedFile = open(pedFilePath)
     phenoFile = open(phenoFilePath, "w+")
@@ -40,7 +42,26 @@ def main():
             lineData[0] = str(famDict.getIID(lineData[0]))
             convertLD(lineData)
             phenoFile.write("\t".join(lineData) + "\n")
+    pedFile.close()
     phenoFile.close()
+    
+    doseFile = open(doseFilePath)
+    genFile = open(genFilePath)
+    header = next(doseFile).strip().split(",")
+    newHeader = ["0"]
+    goodCols = [0]
+    for i,col in enumerate(header):
+        if(col in selected):
+            newHeader.append(str(indDict.getIID(col)))
+            goodCols.append(i)
+    genFile.write("\t".join(newHeader) + "\n")
+    for line in doseFile:
+        newLine = [line[col] for col in goodCols]
+        genFile.write("\t".join(newLine) + "\n")
+    doseFile.close()
+    genFile.close()
+            
+
 
 def convertLD(lineData):
     for i in xrange(1,4):
