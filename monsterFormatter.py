@@ -78,6 +78,7 @@ def main():
     print("Creating SNP file")
     mapFile = open(mapFilePath)
     SNPFile = open(SNPFilePath, "w+")
+    next(mapFile)
     for line in mapFile:
         lineData = line.strip().split("\t")
         print(len(lineData))
