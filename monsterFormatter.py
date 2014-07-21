@@ -102,7 +102,7 @@ def main():
         mapFile.close()
         SNPFile = open(SNPFilePath, "w+")
         for snpList,gene in geneMap.iteritems():
-            geneString = gene + "\t0"
+            geneString = str(gene) + "\t0"
             #SNPFile.write(gene + "\t0")
             for snp in snpList:
                 geneString += "\t" + snp
