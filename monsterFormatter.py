@@ -82,7 +82,7 @@ def main():
     for line in mapFile:
         lineData = line.strip().split("\t")
         #print(len(lineData))
-        print(lineData[822])
+        print(lineData[823])
     
     
     #Kinship file
