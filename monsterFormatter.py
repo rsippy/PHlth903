@@ -27,7 +27,11 @@ def main():
     phenoFilePath = currentWorkingDir + "/pheno.txt"
     doseFilePath = "/project/EngelmanGroup/GAW19/GAW19_data/Family Data Set/Genotype Files/DOSE/chr3-dose.csv/chr3-dose.csv"
     genFilePath = currentWorkingDir + "/geno.txt"
+    KICFilePath = currentWorkingDir + "KIC_out"
+    kinFilePath = currentWorkingDir + "/kin.txt"
     
+    
+    #phenotype file
     pedFile = open(pedFilePath)
     phenoFile = open(phenoFilePath, "w+")
     for line in pedFile:
@@ -45,6 +49,7 @@ def main():
     pedFile.close()
     phenoFile.close()
     
+    #genotypye file
     doseFile = open(doseFilePath)
     genFile = open(genFilePath, "w+")
     header = next(doseFile).strip().split(",")
@@ -57,12 +62,29 @@ def main():
     genFile.write("\t".join(newHeader) + "\n")
     for line in doseFile:
         line = line.strip().split(",")
-        print(len(line))
-        if not(len(line)==799):
+        #print(len(line))
+        #ask burcu about this
+        if not(len(line)==799):  
             newLine = [line[col] for col in goodCols]
             genFile.write("\t".join(newLine) + "\n")
     doseFile.close()
     genFile.close()
+    
+    #SNP map file
+    
+    
+    #Kinship file
+    KICFile = open(KICFilePath)
+    kinFile = open(kinFilePath)
+    for line in kinFile:
+        line = line.strip().split(",")
+        newLine = line
+        newLine[0] = str(famDict.getIID(lineData[0]))
+        newLine[1] = str(indDict.getIID(lineData[1]))
+        newLine[2] = str(indDict.getIID(lineData[2]))
+        kinFile.write("\t".join(newLine) + "\n")
+    KICFile.close()
+    kinFile.close()
             
 
 
