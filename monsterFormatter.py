@@ -46,7 +46,7 @@ def main():
     phenoFile.close()
     
     doseFile = open(doseFilePath)
-    genFile = open(genFilePath)
+    genFile = open(genFilePath, "w+")
     header = next(doseFile).strip().split(",")
     newHeader = ["0"]
     goodCols = [0]
