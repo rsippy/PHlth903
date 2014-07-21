@@ -84,7 +84,7 @@ def main():
         if(len(lineData) != 823):
             print(len(lineData))
             print(lineData[823])
-            print(lineData[824])
+            #print(lineData[824])
     
     
     #Kinship file
