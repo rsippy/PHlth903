@@ -94,7 +94,11 @@ def main():
             snp = str(lineData[1] + "_" + lineData[2])
             if not(geneMap.has_key(gene)):
                 geneMap.update({gene : [snp]})
-            geneMap.update({gene : geneMap.get(gene).append(snp)})
+            snpList = geneMap.get(gene)
+            print(snpList)
+            snpList.append(snp)
+            print(snpList)
+            geneMap.update({gene : snpList})
             print(gene)
             print(snp)
             print(geneMap.get(gene))
