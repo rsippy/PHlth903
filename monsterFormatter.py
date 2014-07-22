@@ -84,7 +84,7 @@ def main():
     mapFile = open(mapFilePath)
     SNPFile = open(SNPFilePath, "w+")
     next(mapFile)
-    currGene = ""
+    #currGene = ""
     for line in mapFile:
         lineData = line.strip().split("\t")
         #tmpSNP = lineData[1] + "_" + lineData[2]
@@ -111,8 +111,6 @@ def main():
     for gene,snpList in geneMap.iteritems():
         geneString = str(gene) + "\t0"
         #SNPFile.write(gene + "\t0")
-        if(len(snpList)>1):
-            print(snpList)
         for snp in snpList:
             geneString += "\t" + snp
             #SNPFile.write("\t" + snp)
