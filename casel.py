@@ -3,7 +3,6 @@ Created on Jul 3, 2014
 
 @author: eotles
 '''
-import sys
 import os
 from sets import Set as set
 import math
