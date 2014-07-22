@@ -42,10 +42,10 @@ def main():
         lineData = line.strip().split(",")
         if(lineData[1] in selectedCases):
             lineData[5] = str(caseBP.get(lineData[1]))
-            lineData.append(str(caseAge.get(lineData[1])))
+            #lineData.append(str(caseAge.get(lineData[1])))
         elif(lineData[1] in selectedControls):
             lineData[5] = str(contBP.get(lineData[1]))
-            lineData.append(str(contAge.get(lineData[1])))
+            #lineData.append(str(contAge.get(lineData[1])))
         if(lineData[1] in selected):
             lineData[0] = str(famDict.getIID(lineData[0]))
             convertLD(lineData)
