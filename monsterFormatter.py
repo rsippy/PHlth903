@@ -58,7 +58,7 @@ def main():
     doseFile = open(doseFilePath)
     genFile = open(genFilePath, "w+")
     header = next(doseFile).strip().split(",")
-    newHeader = ["0"]
+    newHeader = [0]
     goodCols = [0]
     for i,col in enumerate(header):
         if(col in selected):
