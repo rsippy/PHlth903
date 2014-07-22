@@ -74,23 +74,15 @@ def main():
     
     newHeader = [str(i) for i in newHeader]
     
-    #goodCols = sorted(goodCols)
-    #print(goodCols)
-    #x = [newHeader[col] for col in goodCols]
-    #newHeader = x
     genFile.write("\t".join(newHeader) + "\n")
     for line in doseFile:
         line = line.strip().split(",")
-        #print(len(line))
         #ask burcu about this
         if not(len(line)==799):  
             newLine = [line[col] for col in goodCols]
             genFile.write("\t".join(newLine) + "\n")
-            doseList.append(line[0])
     doseFile.close()
     genFile.close()
-    
-    #print(doseList)
     
     #SNP map file
     geneMap = dict()
@@ -98,36 +90,22 @@ def main():
     mapFile = open(mapFilePath)
     SNPFile = open(SNPFilePath, "w+")
     next(mapFile)
-    #currGene = ""
     for line in mapFile:
         lineData = line.strip().split("\t")
-        #tmpSNP = lineData[1] + "_" + lineData[2]
-        #print(lineData[1] + "_" + lineData[2] + str(tmpSNP in doseList))
+        #ask burcu about this
         if(len(lineData) != 823):
             gene = str(lineData[823])
             snp = str(lineData[1] + "_" + lineData[2])
             if not(geneMap.has_key(gene)):
                 geneMap.update({gene : [snp]})
             snpList = geneMap.get(gene)
-            #print(snpList)
             snpList.append(snp)
-            #print(snpList)
             geneMap.update({gene : snpList})
-            #print(gene)
-            #print(snp)
-            #print(geneMap.get(gene))
-            #geneMap.update({gene : geneMap.get(gene).append(snp)})
-            #print(len(lineData))
-            #print(lineData[2])
-            #print(lineData[823])
-            #print(lineData[824])
     mapFile.close()
     for gene,snpList in geneMap.iteritems():
         geneString = str(gene) + "\t0"
-        #SNPFile.write(gene + "\t0")
         for snp in snpList:
             geneString += "\t" + snp
-            #SNPFile.write("\t" + snp)
         geneString += "\n"
         SNPFile.write(geneString)
     SNPFile.close()
