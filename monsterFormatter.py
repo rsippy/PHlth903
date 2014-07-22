@@ -64,7 +64,7 @@ def main():
         if(col in selected):
             newHeader.append(str(indDict.getIID(col)))
             goodCols.append(i)
-    goodCols = goodCols.sort()
+    goodCols = sorted(goodCols)
     print(goodCols)
     newHeader = [header[col] for col in goodCols]
     genFile.write("\t".join(newHeader) + "\n")
