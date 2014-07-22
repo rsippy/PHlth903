@@ -95,9 +95,9 @@ def main():
             if not(geneMap.has_key(gene)):
                 geneMap.update({gene : [snp]})
             snpList = geneMap.get(gene)
-            print(snpList)
+            #print(snpList)
             snpList.append(snp)
-            print(snpList)
+            #print(snpList)
             geneMap.update({gene : snpList})
             print(gene)
             print(snp)
