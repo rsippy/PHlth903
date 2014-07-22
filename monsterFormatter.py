@@ -66,7 +66,8 @@ def main():
             goodCols.append(i)
     goodCols = sorted(goodCols)
     print(goodCols)
-    newHeader = [header[col] for col in goodCols]
+    x = [newHeader[col] for col in goodCols]
+    newHeader = x
     genFile.write("\t".join(newHeader) + "\n")
     for line in doseFile:
         line = line.strip().split(",")
