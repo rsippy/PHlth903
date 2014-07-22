@@ -72,6 +72,8 @@ def main():
     print(newHeader)
     print(goodCols)
     
+    newHeader = [str(i) for i in newHeader]
+    
     #goodCols = sorted(goodCols)
     #print(goodCols)
     #x = [newHeader[col] for col in goodCols]
