@@ -62,7 +62,7 @@ def main():
     goodCols = [0]
     for i,col in enumerate(header):
         if(col in selected):
-            newHeader.append(str(indDict.getIID(col)))
+            newHeader.append(indDict.getIID(col))
             goodCols.append(i)
     
     print(newHeader)
