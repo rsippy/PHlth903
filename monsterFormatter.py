@@ -64,10 +64,18 @@ def main():
         if(col in selected):
             newHeader.append(str(indDict.getIID(col)))
             goodCols.append(i)
-    goodCols = sorted(goodCols)
+    
+    print(newHeader)
+    print(goodCols)    
+    print("sorting")
+    newHeader, goodCols = (list(x) for x in zip(*sorted(zip(newHeader, goodCols))))
+    print(newHeader)
     print(goodCols)
-    x = [newHeader[col] for col in goodCols]
-    newHeader = x
+    
+    #goodCols = sorted(goodCols)
+    #print(goodCols)
+    #x = [newHeader[col] for col in goodCols]
+    #newHeader = x
     genFile.write("\t".join(newHeader) + "\n")
     for line in doseFile:
         line = line.strip().split(",")
