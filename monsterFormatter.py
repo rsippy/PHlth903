@@ -65,6 +65,7 @@ def main():
             newHeader.append(str(indDict.getIID(col)))
             goodCols.append(i)
     goodCols = goodCols.sort()
+    print(goodCols)
     newHeader = [header[col] for col in goodCols]
     genFile.write("\t".join(newHeader) + "\n")
     for line in doseFile:
