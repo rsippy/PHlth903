@@ -7,6 +7,8 @@ import os
 
 from idTable import IDTable as idTable
 
+
+#TODO: load case info from file instead of custom dict
 selectedCases = ['T2DG0200001', 'T2DG0200040', 'T2DG0200054', 'T2DG0300126', 'T2DG0300128', 'T2DG0300185', 'T2DG0400219', 'T2DG0400240', 'T2DG0400241', 'T2DG0500338', 'T2DG0500342', 'T2DG0600469', 'T2DG0800540', 'T2DG1000592', 'T2DG1000595', 'T2DG1000614', 'T2DG1600773', 'T2DG1700849', 'T2DG1700872', 'T2DG2000890', 'T2DG2000914', 'T2DG2000918', 'T2DG2100969', 'T2DG4701117']
 selectedControls = ['T2DG1700876', 'T2DG0600467', 'T2DG1000601', 'T2DG0500373', 'T2DG1700867', 'T2DG0400251', 'T2DG0400235', 'T2DG0600442', 'T2DG2000926', 'T2DG0200065', 'T2DG1700855', 'T2DG0200050', 'T2DG1000627', 'T2DG0300197', 'T2DG2000922', 'T2DG0300186', 'T2DG2100971', 'T2DG1000594', 'T2DG1000621', 'T2DG0500340', 'T2DG0200066', 'T2DG0500355', 'T2DG0800496', 'T2DG2100970', 'T2DG2000912', 'T2DG1700866', 'T2DG1000612', 'T2DG0200089', 'T2DG1000602', 'T2DG0300187', 'T2DG0200047', 'T2DG0200053', 'T2DG0800537', 'T2DG0400236', 'T2DG2000919', 'T2DG0500341', 'T2DG0400243', 'T2DG0500383', 'T2DG1000638', 'T2DG0300184', 'T2DG0500364', 'T2DG0600454', 'T2DG0300173', 'T2DG0800560', 'T2DG0300194', 'T2DG0400285', 'T2DG0500381', 'T2DG0400264']
 selected = selectedCases + selectedControls
@@ -21,6 +23,9 @@ indDict.put("0", 0)
 famDict = idTable()
 famDict.put("0", 0)
 
+
+#TODO: put all files generated in a temporary directory
+#TODO: 
 def main():
     currentWorkingDir = os.getcwd()
     pedFilePath = currentWorkingDir + "/PED.csv"
@@ -31,8 +36,7 @@ def main():
     SNPFilePath = currentWorkingDir + "/SNP.txt"
     KICFilePath = "/home/o/otles/KIC_out"
     kinFilePath = currentWorkingDir + "/kin.txt"
-    
-    doseList = list()
+
     
     #phenotype file
     print("Creating phenotype file")
@@ -65,6 +69,7 @@ def main():
             newHeader.append(indDict.getIID(col))
             goodCols.append(i)
     
+    #sorting headers and goodCols in ascending order
     print(newHeader)
     print(goodCols)    
     print("sorting")
