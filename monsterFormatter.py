@@ -25,7 +25,7 @@ famDict.put("0", 0)
 
 
 #TODO: put all files generated in a temporary directory
-#TODO: 
+#TODO: add ability to run MONSTER directly
 def main():
     currentWorkingDir = os.getcwd()
     pedFilePath = currentWorkingDir + "/PED.csv"
