@@ -70,12 +70,12 @@ def main():
             goodCols.append(i)
     
     #sorting headers and goodCols in ascending order
-    print(newHeader)
-    print(goodCols)    
-    print("sorting")
+    #print(newHeader)
+    #print(goodCols)    
+    #print("sorting")
     newHeader, goodCols = (list(x) for x in zip(*sorted(zip(newHeader, goodCols))))
-    print(newHeader)
-    print(goodCols)
+    #print(newHeader)
+    #print(goodCols)
     
     newHeader = [str(i) for i in newHeader]
     
@@ -96,6 +96,7 @@ def main():
     SNPFile = open(SNPFilePath, "w+")
     
     header = next(mapFile).strip().split(",")
+    print(header)
     newHeader = [0]
     goodCols = [0]
     for i,col in enumerate(header):
@@ -116,7 +117,7 @@ def main():
         #ask burcu about this
         if(len(lineData) != 823):
             newLine = [lineData[col] for col in goodCols]
-            print(newLine)
+            #print(newLine)
             gene = str(lineData[823])
             snp = str(lineData[1] + "_" + lineData[2])
             if not(geneMap.has_key(gene)):
