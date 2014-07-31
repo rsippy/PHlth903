@@ -95,7 +95,7 @@ def main():
     mapFile = open(mapFilePath)
     SNPFile = open(SNPFilePath, "w+")
     
-    header = next(mapFile).strip().split(",")
+    header = next(mapFile).strip().split("\t")
     print(header)
     newHeader = [0]
     goodCols = [0]
