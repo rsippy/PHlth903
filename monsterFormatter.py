@@ -120,8 +120,11 @@ def main():
             newLine = [lineData[col] for col in goodCols]
             alt = lineData[4]
             count = [lineData[col].count(alt) for col in goodCols]
+            dose = [(lineData[1] + "_" + lineData[2])]
+            dose += count
             if(lc < 10):
                 print(count)
+                print(dose)
                 lc+=1
             #print(newLine)
             gene = str(lineData[823])
