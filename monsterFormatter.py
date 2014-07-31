@@ -95,7 +95,7 @@ def main():
     mapFile = open(mapFilePath)
     SNPFile = open(SNPFilePath, "w+")
     
-    header = next(doseFile).strip().split(",")
+    header = next(mapFile).strip().split(",")
     newHeader = [0]
     goodCols = [0]
     for i,col in enumerate(header):
