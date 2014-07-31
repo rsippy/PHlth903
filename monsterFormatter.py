@@ -97,8 +97,8 @@ def main():
     
     header = next(mapFile).strip().split("\t")
     print(header)
-    newHeader = [0]
-    goodCols = [0]
+    newHeader = []
+    goodCols = []
     for i,col in enumerate(header):
         if(col in selected):
             newHeader.append(indDict.getIID(col))
@@ -112,11 +112,17 @@ def main():
     print(goodCols)
     
     #next(mapFile)
+    first = True
     for line in mapFile:
         lineData = line.strip().split("\t")
         #ask burcu about this
         if(len(lineData) != 823):
             newLine = [lineData[col] for col in goodCols]
+            alt = lineData[4]
+            count = [lineData[col].count(alt) for col in goodCols]
+            if(first):
+                print(count)
+                first = False
             #print(newLine)
             gene = str(lineData[823])
             snp = str(lineData[1] + "_" + lineData[2])
