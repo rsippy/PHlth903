@@ -94,11 +94,29 @@ def main():
     print("Creating SNP file")
     mapFile = open(mapFilePath)
     SNPFile = open(SNPFilePath, "w+")
-    next(mapFile)
+    
+    header = next(doseFile).strip().split(",")
+    newHeader = [0]
+    goodCols = [0]
+    for i,col in enumerate(header):
+        if(col in selected):
+            newHeader.append(indDict.getIID(col))
+            goodCols.append(i)
+            
+    print(newHeader)
+    print(goodCols)    
+    print("sorting")
+    newHeader, goodCols = (list(x) for x in zip(*sorted(zip(newHeader, goodCols))))
+    print(newHeader)
+    print(goodCols)
+    
+    #next(mapFile)
     for line in mapFile:
         lineData = line.strip().split("\t")
         #ask burcu about this
         if(len(lineData) != 823):
+            newLine = [lineData[col] for col in goodCols]
+            print(newLine)
             gene = str(lineData[823])
             snp = str(lineData[1] + "_" + lineData[2])
             if not(geneMap.has_key(gene)):
