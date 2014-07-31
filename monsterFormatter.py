@@ -112,7 +112,7 @@ def main():
     print(goodCols)
     
     #next(mapFile)
-    first = True
+    lc = 0
     for line in mapFile:
         lineData = line.strip().split("\t")
         #ask burcu about this
@@ -120,9 +120,9 @@ def main():
             newLine = [lineData[col] for col in goodCols]
             alt = lineData[4]
             count = [lineData[col].count(alt) for col in goodCols]
-            if(first):
+            if(lc < 10):
                 print(count)
-                first = False
+                lc+=1
             #print(newLine)
             gene = str(lineData[823])
             snp = str(lineData[1] + "_" + lineData[2])
