@@ -4,7 +4,7 @@ Created on Aug 1, 2014
 @author: eotles
 '''
 
-from datetime import datetime
+import datetime
 
 def main():
     genFilePath = "/project/EngelmanGroup/GAW19/FBAT/genonly.txt"
@@ -16,11 +16,11 @@ def main():
     header = next(genFile)
     genData = [[id] for id in header.strip().split("\t")]
     
-    startTime = datetime.now().time()
+    startTime = datetime.datetime.time(datetime.datetime.now())
     lc = 0
     for line in genFile:
         if(lc%1000 == 0):
-            currTime = datetime.now().time()
+            currTime = datetime.datetime.time(datetime.datetime.now())
             dt = currTime - startTime
             speed = float(lc)/dt
             remain = float(1500000-lc)/speed
