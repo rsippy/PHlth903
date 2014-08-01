@@ -5,8 +5,8 @@ Created on Aug 1, 2014
 '''
 
 def main():
-    genFilePath = ""
-    pedFilePath = ""
+    genFilePath = "/project/EngelmanGroup/GAW19/FBAT/genonly.txt"
+    pedFilePath = "/project/EngelmanGroup/GAW19/FBAT/pedonly.txt"
     
     genFile = open(pedFilePath)
     pedFile = open(pedFilePath)
