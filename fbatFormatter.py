@@ -10,22 +10,16 @@ import sys
 def main():
     genFilePath = "/project/EngelmanGroup/GAW19/FBAT/genonly.txt"
     pedFilePath = "/project/EngelmanGroup/GAW19/FBAT/pedonly.txt"
-    tmpOFilePath = "/project/EngelmanGroup/GAW19/FBAT/tmpO.txt"
     tmpIFilePath = "/project/EngelmanGroup/GAW19/FBAT/tmpI.txt"
       
     genFile = open(genFilePath)
     pedFile = open(pedFilePath)
-    tmpOFile = open(tmpOFilePath, "w+")
     tmpIFile = open(tmpIFilePath, "w+")
     
     pedDict = makePedDict(pedFile)
     
-    if(sys.argv[1]=="o"):
-        outer(genFile, tmpOFile)
-        tmpOFile.close()
-    else:
-        inner(genFile, pedDict, tmpIFile)
-        tmpIFile.close()
+    inner(genFile, pedDict, tmpIFile)
+    tmpIFile.close()
     genFile.close()
 
 def inner(genFile, pedDict, tmpFile):
@@ -35,17 +29,14 @@ def inner(genFile, pedDict, tmpFile):
     ids = header.strip().split("\t")
     
     for index,id in enumerate(ids):
+        print("%s\t%s\t%s\t%s" %("CurInd", "Elapsed", "Speed", "Time Remain"))
         if(not(index==0) and (index%5 == 0)):
             currTime = time.clock()
-            dt = currTime - startTime
+            dt = float(currTime - startTime)/60
             speed = float(index)/float(dt)
             remain = float(900-index)/speed/60
-            print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
-        #print("%d\t%s" %(index, id))
-        #print(id)
-        #out = id +"|" + findInPed(id, pedFile) + " "
-        #print(pedDict.get(id))
-        out = id + "|" + " ".join(pedDict.get(id))  + " " 
+            print("%d\t%.2f\t%.2f\t%.2f" %(index, dt, speed, remain))
+        out = " ".join(pedDict.get(id))  + " " 
         sPos = 8*index
         ePos = sPos + 3
         
@@ -61,18 +52,8 @@ def makePedDict(pedFile):
     out = dict()
     for line in pedFile:
         lineData = line.strip().split("\t")
-        #print(lineData[1])
-        #print(lineData)
         out.update({lineData[1] : lineData})
     return out
-
-def findInPed(id, pedFile):
-    
-    for line in pedFile:
-        lineData = line.strip().split("\t")
-        if(lineData[1]==id):
-            return(" ".join(lineData))
-    return("shit")
 
 
 def outer(genFile, outFile):
