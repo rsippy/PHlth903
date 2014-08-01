@@ -60,6 +60,7 @@ def makePedDict(pedFile):
     out = dict()
     for line in pedFile:
         out.update({line[1] : line})
+    return out
 
 def findInPed(id, pedFile):
     
