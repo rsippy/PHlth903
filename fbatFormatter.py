@@ -10,18 +10,21 @@ import sys
 def main():
     genFilePath = "/project/EngelmanGroup/GAW19/FBAT/genonly.txt"
     pedFilePath = "/project/EngelmanGroup/GAW19/FBAT/pedonly.txt"
-    tmpFilePath = "/project/EngelmanGroup/GAW19/FBAT/tmpOut.txt"
-    
+    tmpOFilePath = "/project/EngelmanGroup/GAW19/FBAT/tmpO.txt"
+    tmpIFilePath = "/project/EngelmanGroup/GAW19/FBAT/tmpI.txt"
+      
     genFile = open(genFilePath)
     pedFile = open(pedFilePath)
-    tmpFile = open(tmpFilePath, "w+")
+    tmpOFile = open(tmpOFilePath, "w+")
+    tmpIFile = open(tmpIFilePath, "w+")
     
     if(sys.argv[1]=="o"):
-        outer(genFile, tmpFile)
+        outer(genFile, tmpOFile)
+        tmpOFile.close()
     else:
-        inner(genFile,tmpFile)
+        inner(genFile,tmpIFile)
+        tmpIFile.close()
     genFile.close()
-    tmpFile.close()
 
 def inner(genFile, tmpFile):
     startTime = time.clock()
