@@ -28,10 +28,10 @@ def main():
         if(index%5 == 1):
             currTime = time.clock()
             dt = currTime - startTime
-            speed = float(lc)/float(dt)
-            remain = float(1500000-lc)/speed
+            speed = float(index)/float(dt)
+            remain = float(1000-index)/speed
             print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
-        print("%d\t%s" %(index, id))
+        #print("%d\t%s" %(index, id))
         genFile = open(genFilePath)
         next(genFile)
         out = id
