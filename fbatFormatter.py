@@ -34,7 +34,7 @@ def inner(genFile, pedDict, tmpFile):
             currTime = time.clock()
             dt = float(currTime - startTime)/60
             speed = float(index)/float(dt)
-            remain = float(900-index)/speed/60
+            remain = float(900-index)/speed
             print("%d\t%.2f\t%.2f\t%.2f" %(index, dt, speed, remain))
         out = " ".join(pedDict.get(id))  + " " 
         sPos = 8*index
