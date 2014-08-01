@@ -60,6 +60,8 @@ def inner(genFile, pedDict, tmpFile):
 def makePedDict(pedFile):
     out = dict()
     for line in pedFile:
+        print(line[1])
+        print(line)
         out.update({line[1] : line})
     return out
 
