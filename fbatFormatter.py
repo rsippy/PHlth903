@@ -28,8 +28,8 @@ def inner(genFile, pedDict, tmpFile):
     header = next(genFile)
     ids = header.strip().split("\t")
     
+    print("%s\t%s\t%s\t%s" %("CurInd", "Elapsed", "Speed", "Time Remain"))
     for index,id in enumerate(ids):
-        print("%s\t%s\t%s\t%s" %("CurInd", "Elapsed", "Speed", "Time Remain"))
         if(not(index==0) and (index%5 == 0)):
             currTime = time.clock()
             dt = float(currTime - startTime)/60
