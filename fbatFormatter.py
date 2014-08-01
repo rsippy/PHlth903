@@ -14,7 +14,7 @@ def main():
     pedFile = open(pedFilePath)
     
     header = next(genFile)
-    genData = [[id] for id in header.strip().split("\t")]
+    genData = [[id, ""] for id in header.strip().split("\t")]
     
     startTime = time.clock()
     lc = 1
@@ -27,7 +27,7 @@ def main():
             print("%d\t%d\t%f\t%f" %(lc, dt, speed, remain))
         lineData = line.strip().split("\t")
         for index,lineColData in enumerate(lineData):
-            genData[index].append(lineColData.split(" "))
+            genData[index][1] += lineColData + " "
         lc+=1
     
     lc = 0
