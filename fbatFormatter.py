@@ -5,6 +5,7 @@ Created on Aug 1, 2014
 '''
 
 import time
+import sys
 
 def main():
     genFilePath = "/project/EngelmanGroup/GAW19/FBAT/genonly.txt"
@@ -15,7 +16,10 @@ def main():
     pedFile = open(pedFilePath)
     tmpFile = open(tmpFilePath, "w+")
     
-    outer(genFile, tmpFile)
+    if(sys.argv[1]=="o"):
+        outer(genFile, tmpFile)
+    else:
+        inner(genFile,tmpFile)
     genFile.close()
     tmpFile.close()
 
@@ -52,10 +56,8 @@ def outer(genFile, outFile):
     
     for lc,line in enumerate(genFile):
         if(not(lc==0) and (lc%100 == 0)):
-            print(lc)
             currTime = time.clock()
             dt = currTime - startTime
-            print(dt)
             speed = float(lc)/float(dt)
             remain = float(150000-lc)/speed/60
             print("%d\t%d\t%f\t%f" %(lc, dt, speed, remain))
