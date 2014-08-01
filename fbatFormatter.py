@@ -51,7 +51,7 @@ def outer(genFile, outFile):
         outFile.write(id+"\n")
     
     for lc,line in enumerate(genFile):
-        if(lc%10001 == 1):
+        if(not(lc==0) and (lc%1000 == 0)):
             print(lc)
             currTime = time.clock()
             dt = currTime - startTime
