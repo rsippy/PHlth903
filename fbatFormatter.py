@@ -34,11 +34,11 @@ def main():
         #print("%d\t%s" %(index, id))
         genFile = open(genFilePath)
         next(genFile)
-        out = id
+        out = id + " "
         sPos = 8*index
         ePos = sPos + 3
         for line in genFile:
-            out += line[sPos:ePos]
+            out += line[sPos:ePos] + " "
         genFile.close
         tmpFile.write(out + "\n")
             
