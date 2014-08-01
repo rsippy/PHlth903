@@ -37,7 +37,7 @@ def inner(genFile, pedDict, tmpFile):
             remain = float(900-index)/speed
             print("%d\t%.2f\t%.2f\t%.2f" %(index, dt, speed, remain))
         out = " ".join(pedDict.get(id))  + " " 
-        sPos = 8*index
+        sPos = 4*index
         ePos = sPos + 3
         
         genFile.seek(0)
