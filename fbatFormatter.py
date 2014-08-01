@@ -22,7 +22,7 @@ def main():
         if(lc%1000 == 0):
             currTime = time.clock()
             dt = currTime - startTime
-            speed = float(lc)/dt
+            speed = float(lc)/float(dt)
             remain = float(1500000-lc)/speed
             print("%d\t%d\t%f\t%f" %(lc, dt, speed, remain))
         lineData = line.strip().split("\t")
