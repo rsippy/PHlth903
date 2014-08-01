@@ -8,7 +8,7 @@ def main():
     genFilePath = "/project/EngelmanGroup/GAW19/FBAT/genonly.txt"
     pedFilePath = "/project/EngelmanGroup/GAW19/FBAT/pedonly.txt"
     
-    genFile = open(pedFilePath)
+    genFile = open(genFilePath)
     pedFile = open(pedFilePath)
     
     header = next(genFile)
