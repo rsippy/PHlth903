@@ -18,15 +18,17 @@ def main():
     tmpOFile = open(tmpOFilePath, "w+")
     tmpIFile = open(tmpIFilePath, "w+")
     
+    pedDict = makePedDict(pedFile)
+    
     if(sys.argv[1]=="o"):
         outer(genFile, tmpOFile)
         tmpOFile.close()
     else:
-        inner(genFile, pedFile, tmpIFile)
+        inner(genFile, pedDict, tmpIFile)
         tmpIFile.close()
     genFile.close()
 
-def inner(genFile, pedFile, tmpFile):
+def inner(genFile, pedDict, tmpFile):
     startTime = time.clock()
         
     header = next(genFile)
@@ -41,7 +43,8 @@ def inner(genFile, pedFile, tmpFile):
             print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
         #print("%d\t%s" %(index, id))
         print(id)
-        out = id +"|" + findInPed(id, pedFile) + " "
+        #out = id +"|" + findInPed(id, pedFile) + " "
+        out = id + "|" + " ".join(pedDict.get(id)) + " " 
         sPos = 8*index
         ePos = sPos + 3
         
@@ -52,7 +55,14 @@ def inner(genFile, pedFile, tmpFile):
             out += line[sPos:ePos] + " "
         tmpFile.write(out + "\n")
 
+
+def makePedDict(pedFile):
+    out = dict()
+    for line in pedFile:
+        out.update({line[1] : line})
+
 def findInPed(id, pedFile):
+    
     for line in pedFile:
         lineData = line.strip().split("\t")
         if(lineData[1]==id):
