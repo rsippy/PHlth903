@@ -41,7 +41,7 @@ def inner(genFile, pedFile, tmpFile):
             print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
         #print("%d\t%s" %(index, id))
         print(id)
-        out = findInPed(id, pedFile) + " "
+        out = id +"|" + findInPed(id, pedFile) + " "
         sPos = 8*index
         ePos = sPos + 3
         
