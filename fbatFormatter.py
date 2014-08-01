@@ -14,7 +14,10 @@ def main():
     header = next(genFile)
     genData = [[id] for id in header.strip().split("\t")]
     
+    lc = 0
     for line in genFile:
+        if(lc%1000 == 0):
+            print(lc)
         lineData = line.strip().split("\t")
         for index,lineColData in enumerate(lineData):
             genData[index].append(lineColData.split(" "))
