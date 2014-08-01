@@ -15,51 +15,53 @@ def main():
     pedFile = open(pedFilePath)
     tmpFile = open(tmpFilePath, "w+")
     
+    outer(genFile, tmpFile)
+    genFile.close()
+    tmpFile.close()
+
+def inner(genFile, tmpFile):
+    startTime = time.clock()
+        
     header = next(genFile)
     ids = header.strip().split("\t")
-    genData = [[id, ""] for id in header.strip().split("\t")]
-    genFile.close()
-    
-    
-    startTime = time.clock()
-    lc = 1
     
     for index,id in enumerate(ids):
         if(index%5 == 1):
             currTime = time.clock()
             dt = currTime - startTime
             speed = float(index)/float(dt)
-            remain = float(1000-index)/speed
+            remain = float(900-index)/speed/60
             print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
         #print("%d\t%s" %(index, id))
-        genFile = open(genFilePath)
-        next(genFile)
+        genFile.seek(1)
         out = id + " "
         sPos = 8*index
         ePos = sPos + 3
         for line in genFile:
             out += line[sPos:ePos] + " "
-        genFile.close
         tmpFile.write(out + "\n")
-            
-        
-#    for line in genFile:
-#        if(lc%1000 == 0):
-#            currTime = time.clock()
-#            dt = currTime - startTime
-#            speed = float(lc)/float(dt)
-#            remain = float(1500000-lc)/speed
-#            print("%d\t%d\t%f\t%f" %(lc, dt, speed, remain))
-#        lineData = line.strip().split("\t")
-#        for index,lineColData in enumerate(lineData):
-#            genData[index][1] += lineColData + " "
-#        lc+=1
+
+def outer(genFile, outFile):
+    startTime = time.clock()
     
-    lc = 0
-    for stuff in genData:
-        if(lc<10):
-            print(stuff)
-            lc+=1
+    header = next(genFile)
+    ids = header.strip().split("\t")
+    
+    for id in ids:
+        outFile.write(id+"\n")
+    
+    for lc,line in enumerate(genFile):
+        if(lc%101 == 1):
+            currTime = time.clock()
+            dt = currTime - startTime
+            speed = float(lc)/float(dt)
+            remain = float(150000-lc)/speed/60
+            print("%d\t%d\t%f\t%f" %(lc, dt, speed, remain))
+        outFile.seek(0)
+        for index,outLine in enumerate(outFile):
+            sPos = 8*index
+            ePos = sPos + 3
+            outFile.write("%s %s\n" %(outLine.strip("\n"), line[sPos:ePos])) 
 
 if __name__ == '__main__':
     main()
