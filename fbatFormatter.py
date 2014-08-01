@@ -40,6 +40,7 @@ def inner(genFile, pedFile, tmpFile):
             remain = float(900-index)/speed/60
             print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
         #print("%d\t%s" %(index, id))
+        print(id)
         out = findInPed(id, pedFile) + " "
         sPos = 8*index
         ePos = sPos + 3
