@@ -60,10 +60,10 @@ def inner(genFile, pedDict, tmpFile):
 def makePedDict(pedFile):
     out = dict()
     for line in pedFile:
-        line.strip().split("\t")
-        print(line[1])
-        print(line)
-        out.update({line[1] : line})
+        lineData = line.strip().split("\t")
+        print(lineData[1])
+        print(lineData)
+        out.update({lineData[1] : lineData})
     return out
 
 def findInPed(id, pedFile):
