@@ -44,7 +44,8 @@ def inner(genFile, pedDict, tmpFile):
         #print("%d\t%s" %(index, id))
         print(id)
         #out = id +"|" + findInPed(id, pedFile) + " "
-        out = id + "|" + " ".join(pedDict.get(id)) + " " 
+        print(pedDict.get(id))
+        out = id + "|"  + " " 
         sPos = 8*index
         ePos = sPos + 3
         
