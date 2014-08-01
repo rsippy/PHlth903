@@ -26,7 +26,7 @@ def inner(genFile, tmpFile):
     ids = header.strip().split("\t")
     
     for index,id in enumerate(ids):
-        if(index%5 == 1):
+        if(not(index==0) and (index%5 == 1)):
             currTime = time.clock()
             dt = currTime - startTime
             speed = float(index)/float(dt)
@@ -51,7 +51,7 @@ def outer(genFile, outFile):
         outFile.write(id+"\n")
     
     for lc,line in enumerate(genFile):
-        if(not(lc==0) and (lc%1000 == 0)):
+        if(not(lc==0) and (lc%100 == 0)):
             print(lc)
             currTime = time.clock()
             dt = currTime - startTime
