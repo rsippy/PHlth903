@@ -57,8 +57,7 @@ def findInPed(id, pedFile):
         lineData = line.strip().split("\t")
         if(lineData[1]==id):
             return(" ".join(lineData))
-        else:
-            return("shit")
+    return("shit")
 
 
 def outer(genFile, outFile):
