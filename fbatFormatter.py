@@ -22,11 +22,11 @@ def main():
         outer(genFile, tmpOFile)
         tmpOFile.close()
     else:
-        inner(genFile,tmpIFile)
+        inner(genFile, pedFile, tmpIFile)
         tmpIFile.close()
     genFile.close()
 
-def inner(genFile, tmpFile):
+def inner(genFile, pedFile, tmpFile):
     startTime = time.clock()
         
     header = next(genFile)
@@ -41,12 +41,19 @@ def inner(genFile, tmpFile):
             print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
         #print("%d\t%s" %(index, id))
         genFile.seek(1)
-        out = id + " "
+        out = findInPed(id, pedFile) + " "
         sPos = 8*index
         ePos = sPos + 3
         for line in genFile:
             out += line[sPos:ePos] + " "
         tmpFile.write(out + "\n")
+
+def findInPed(id, pedFile):
+    for line in pedFile:
+        lineData = line.strip().split("\t")
+        if(lineData[1]==id):
+            return(" ".join(lineData[1:]))
+
 
 def outer(genFile, outFile):
     startTime = time.clock()
