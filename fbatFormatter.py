@@ -42,10 +42,10 @@ def inner(genFile, pedDict, tmpFile):
             remain = float(900-index)/speed/60
             print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
         #print("%d\t%s" %(index, id))
-        print(id)
+        #print(id)
         #out = id +"|" + findInPed(id, pedFile) + " "
-        print(pedDict.get(id))
-        out = id + "|"  + " " 
+        #print(pedDict.get(id))
+        out = id + "|" + " ".join(pedDict.get(id))  + " " 
         sPos = 8*index
         ePos = sPos + 3
         
@@ -61,8 +61,8 @@ def makePedDict(pedFile):
     out = dict()
     for line in pedFile:
         lineData = line.strip().split("\t")
-        print(lineData[1])
-        print(lineData)
+        #print(lineData[1])
+        #print(lineData)
         out.update({lineData[1] : lineData})
     return out
 
