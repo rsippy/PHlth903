@@ -44,7 +44,9 @@ def inner(genFile, pedFile, tmpFile):
         sPos = 8*index
         ePos = sPos + 3
         
-        genFile.seek(1)
+        genFile.seek(0)
+        genFile.next()
+        
         for line in genFile:
             out += line[sPos:ePos] + " "
         tmpFile.write(out + "\n")
