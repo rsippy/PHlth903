@@ -40,10 +40,11 @@ def inner(genFile, pedFile, tmpFile):
             remain = float(900-index)/speed/60
             print("%d\t%d\t%f\t%f" %(index, dt, speed, remain))
         #print("%d\t%s" %(index, id))
-        genFile.seek(1)
         out = findInPed(id, pedFile) + " "
         sPos = 8*index
         ePos = sPos + 3
+        
+        genFile.seek(1)
         for line in genFile:
             out += line[sPos:ePos] + " "
         tmpFile.write(out + "\n")
@@ -52,7 +53,7 @@ def findInPed(id, pedFile):
     for line in pedFile:
         lineData = line.strip().split("\t")
         if(lineData[1]==id):
-            return(" ".join(lineData[1:]))
+            return(" ".join(lineData))
 
 
 def outer(genFile, outFile):
