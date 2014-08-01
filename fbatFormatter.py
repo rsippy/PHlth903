@@ -51,7 +51,7 @@ def outer(genFile, outFile):
         outFile.write(id+"\n")
     
     for lc,line in enumerate(genFile):
-        if(lc%101 == 1):
+        if(lc%5 == 1):
             currTime = time.clock()
             dt = currTime - startTime
             speed = float(lc)/float(dt)
