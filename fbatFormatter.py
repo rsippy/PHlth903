@@ -52,8 +52,10 @@ def outer(genFile, outFile):
     
     for lc,line in enumerate(genFile):
         if(lc%10001 == 1):
+            print(lc)
             currTime = time.clock()
             dt = currTime - startTime
+            print(dt)
             speed = float(lc)/float(dt)
             remain = float(150000-lc)/speed/60
             print("%d\t%d\t%f\t%f" %(lc, dt, speed, remain))
