@@ -21,6 +21,7 @@ def main():
         lineData = line.strip().split("\t")
         for index,lineColData in enumerate(lineData):
             genData[index].append(lineColData.split(" "))
+        lc+=1
     
     lc = 0
     for stuff in genData:
