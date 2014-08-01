@@ -21,7 +21,7 @@ def main():
     for line in genFile:
         if(lc%1000 == 0):
             currTime = datetime.datetime.time(datetime.datetime.now())
-            dt = currTime - startTime
+            dt = currTime.seconds - startTime.seconds
             speed = float(lc)/dt
             remain = float(1500000-lc)/speed
             print("%d\t%d\t%f\t%f" %(lc, dt, speed, remain))
