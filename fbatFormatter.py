@@ -17,7 +17,7 @@ def main():
     genData = [[id] for id in header.strip().split("\t")]
     
     startTime = time.clock()
-    lc = 0
+    lc = 1
     for line in genFile:
         if(lc%1000 == 0):
             currTime = time.clock()
