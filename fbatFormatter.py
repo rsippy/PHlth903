@@ -33,7 +33,7 @@ def inner(genFile, pedFile, tmpFile):
     ids = header.strip().split("\t")
     
     for index,id in enumerate(ids):
-        if(not(index==0) and (index%5 == 1)):
+        if(not(index==0) and (index%5 == 0)):
             currTime = time.clock()
             dt = currTime - startTime
             speed = float(index)/float(dt)
@@ -57,6 +57,8 @@ def findInPed(id, pedFile):
         lineData = line.strip().split("\t")
         if(lineData[1]==id):
             return(" ".join(lineData))
+        else:
+            return("shit")
 
 
 def outer(genFile, outFile):
