@@ -4,23 +4,25 @@ Created on Aug 5, 2014
 @author: eotles
 '''
 
-import argparse
+#import argparse
+import sys
 from casel import autoCall as casel
 
-parser = argparse.ArgumentParser(description='Process a list of cases and ' +
-                                 'potential controls, finding the best ' + 
-                                 'controls, formatting input files for ' + 
-                                 'and running MONSTER')
+#parser = argparse.ArgumentParser(description='Process a list of cases and ' +
+#                                 'potential controls, finding the best ' + 
+#                                 'controls, formatting input files for ' + 
+#                                 'and running MONSTER')
+#
+#parser.add_argument('caseFilepath', help='an integer for the accumulator')
+#parser.add_argument('contFilepath', help='an integer for the accumulator')
+#parser.add_argument('contRatio', help='an integer for the accumulator')
+#parser.add_argument('KICFilepath', help='an integer for the accumulator')
+#parser.add_argument('mapFilepath', help='an integer for the accumulator')
 
-parser.add_argument('caseFilepath', help='an integer for the accumulator')
-parser.add_argument('contFilepath', help='an integer for the accumulator')
-parser.add_argument('contRatio', help='an integer for the accumulator')
-parser.add_argument('KICFilepath', help='an integer for the accumulator')
-parser.add_argument('mapFilepath', help='an integer for the accumulator')
-
-args = parser.parse_args()
+#args = parser.parse_args()
 
 def main():
+    args = sys.argv
     caseFilepath = args[0]
     contFilepath = args[1]
     contRatio = args[2]
