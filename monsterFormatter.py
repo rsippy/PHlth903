@@ -4,6 +4,7 @@ Created on Jul 21, 2014
 @author: eotles
 '''
 import os
+import sys
 
 from idTable import IDTable as idTable
 
@@ -27,6 +28,7 @@ famDict.put("0", 0)
 #TODO: put all files generated in a temporary directory
 #TODO: add ability to run MONSTER directly
 def main():
+    
     currentWorkingDir = os.getcwd()
     pedFilePath = currentWorkingDir + "/PED.csv"
     phenoFilePath = currentWorkingDir + "/pheno.txt"
@@ -163,6 +165,19 @@ def main():
 def convertLD(lineData):
     for i in xrange(1,4):
         lineData[i] = str(indDict.getIID(lineData[i]))
+        
+def loadCC(ccFilePath):
+    selectedCases = dict()
+    selectedControls = dict()
+    
+    ccFile = open(ccFilePath)
+    for line in ccFile:
+        lineData = line.strip().split(",")
+        if(lineData[-1]  == 1):
+            selectedCases.update({lineData[0] : lineData[:len(lineData)-1]})
+        else:
+            selectedControls.update({lineData[0] : lineData[:len(lineData)-1]})
+    selected = selectedCases.viewkeys() + selectedControls.viewkeys()
 
 if __name__ == '__main__':
     main()

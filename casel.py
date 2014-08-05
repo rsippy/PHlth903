@@ -8,6 +8,20 @@ from sets import Set as set
 import math
 from munkres import Munkres
 import munkres
+from monsterFormatter import selectedControls
+
+#map IDs to people / sets that are pointers to people that are either cases
+#or controls
+people = dict()
+cases = list()
+controls = list()
+controlsResidMap = dict()
+numberOfControlsPerCase = 2
+
+currDir = os.path.dirname(os.path.realpath(__file__))
+KICoutFilepath = currDir + "/KIC_out"
+caseFilepath = currDir + "/cases"
+contFilepath = currDir + "/controls"
 
 class Person(object):
     def __init__(self, caseID):
@@ -37,27 +51,15 @@ class Person(object):
     def numRel(self):
         return(len(self.relatedTo))
                 
+
+def autoCall(caseFp, contFp, contRatio, kicFp):
+    caseFilepath = caseFp
+    contFilepath = contFp
+    numberOfControlsPerCase = contRatio
+    KICoutFilepath = kicFp
+    return main()
             
 def main():
-    #if(len(sys.argv)!=2):
-    #    print("incorrect usage - KinIbCoefFormatter needs one parameter\n"+
-    #          "e.g. python casel /dir/KICout")
-    #    exit(0)
-    
-    #map IDs to people / sets that are pointers to people that are either cases
-    #or controls
-    people = dict()
-    cases = list()
-    controls = list()
-    controlsResidMap = dict()
-    numberOfControlsPerCase = 2
-
-    currDir = os.path.dirname(os.path.realpath(__file__))
-    #KICoutFilepath = sys.argv[1]
-    KICoutFilepath = currDir + "/KIC_out"
-    caseFilepath = currDir + "/cases"
-    contFilepath = currDir + "/controls"
-    
     #load cases
     caseFile = open(caseFilepath)
     for caseID in caseFile:
@@ -74,14 +76,17 @@ def main():
     for contData in contFile:
         contData = contData.strip().split("\t")
         contID = contData[1]
-        contResid = math.fabs(float(contData[3]))
+        contResid = math.fabs(float(contData[-1]))
         cont = Person(contID)
         people.update({contID : cont})
         controls.append(cont)
         controlsResidMap.update({contResid : cont})
     contFile.close()
-    #print(len(controls))
-    neededControls = neededControls if (len(controls)>=neededControls) else len(controls)
+    
+    if (neededControls >= len(controls)):
+        print("Warning need more controls than available - returning all")
+        selectedControls = controls
+        return selectedControls
     
     print("%d cases and %d potential controls" %(len(cases), len(controls)))
     
@@ -148,6 +153,7 @@ def main():
     #print("Final KIC score: %d" %kicScore(cases, selectedControls))
     print([person.id for person in cases])
     print([person.id for person in selectedControls])
+    return selectedControls
 
 def hungarianAssignment(cases, controls, numberOfControlsPerCase):
     selectedControls = list()
