@@ -109,7 +109,7 @@ def main(selectedCases, selectedControls):
     newHeader, goodCols = (list(x) for x in zip(*sorted(zip(newHeader, goodCols))))
     newHeader = [str(i) for i in newHeader]
     
-    goodCols = goodCols[1:]
+    #goodCols = goodCols[]
     
     genFile = open(genFilePath, "w+")
     genFile.write("\t".join(newHeader) + "\n")
