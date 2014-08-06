@@ -186,7 +186,7 @@ def loadCC(caseFilepath, contFilepath, selectedControlsList):
         lineData = line.strip().split("\t")
         if lineData[1] in selectedControls:
             selectedControls.update({lineData[1] : lineData[2:len(lineData)-1]})
-    selected = selectedCases.viewkeys() + selectedControls.viewkeys()
+    selected = selectedCases.keys() + selectedControls.keys()
     
     caseFile.close()
     contFile.close()
