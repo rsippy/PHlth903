@@ -43,6 +43,7 @@ def main(selectedCases, selectedControls):
     kinFilePath = currentWorkingDir + "/kin.txt"
 
     selected = selectedCases.keys() + selectedControls.keys()
+    print("making inputs based on %d cases and %d controls" %(len(selectedCases), len(selectedControls)))
     
     #phenotype file
     print("Creating phenotype file")
@@ -62,6 +63,7 @@ def main(selectedCases, selectedControls):
     pedFile.close()
     phenoFile.close()
     
+    '''
     #genotypye file
     print("Creating genotype file")
     doseFile = open(doseFilePath)
@@ -73,15 +75,8 @@ def main(selectedCases, selectedControls):
         if(col in selected):
             newHeader.append(indDict.getIID(col))
             goodCols.append(i)
-    
-    #sorting headers and goodCols in ascending order
-    #print(newHeader)
-    #print(goodCols)    
-    #print("sorting")
+
     newHeader, goodCols = (list(x) for x in zip(*sorted(zip(newHeader, goodCols))))
-    #print(newHeader)
-    #print(goodCols)
-    
     newHeader = [str(i) for i in newHeader]
     
     genFile.write("\t".join(newHeader) + "\n")
@@ -93,6 +88,7 @@ def main(selectedCases, selectedControls):
             genFile.write("\t".join(newLine) + "\n")
     doseFile.close()
     genFile.close()
+    '''
     
     #SNP map file
     geneMap = dict()
