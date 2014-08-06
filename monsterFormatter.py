@@ -7,7 +7,6 @@ import os
 import sys
 
 from idTable import IDTable as idTable
-from Tkconstants import SEL
 
 
 #TODO: load case info from file instead of custom dict
