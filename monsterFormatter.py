@@ -57,7 +57,10 @@ def main(selectedCases, selectedControls):
         elif(lineData[1] in selectedControls):
             lineData += selectedControls.get(lineData[1])
         if(lineData[1] in selected):
-            lineData[0] = str(famDict.getIID(lineData[0]))
+            newIID = famDict.getIID(lineData[0])
+            if(newIID == 37):
+                print(lineData[0])
+            lineData[0] = str(newIID)
             convertLD(lineData)
             phenoFile.write("\t".join(lineData) + "\n")
     pedFile.close()
