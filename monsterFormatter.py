@@ -57,9 +57,7 @@ def main(selectedCases, selectedControls):
         elif(lineData[1] in selectedControls):
             lineData += selectedControls.get(lineData[1])
         if(lineData[1] in selected):
-            newIID = famDict.getIID(lineData[0])
-            print(lineData[0] + "|" + str(newIID))
-            lineData[0] = str(newIID)
+            lineData[0] = str(famDict.getIID(lineData[0]))
             convertLD(lineData)
             phenoFile.write("\t".join(lineData) + "\n")
     pedFile.close()
@@ -167,7 +165,10 @@ def main(selectedCases, selectedControls):
 
 def convertLD(lineData):
     for i in xrange(1,4):
-        lineData[i] = str(indDict.getIID(lineData[i]))
+        newID = indDict.getIID(lineData[i])
+        if(newID == 37):
+            print(lineData[i])
+        lineData[i] = str(newID)
         
 def loadCC(caseFilepath, contFilepath, selectedControlsList):
     selectedCases = dict()
