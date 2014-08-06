@@ -51,14 +51,9 @@ def main(selectedCases, selectedControls):
         lineData = line.strip().split(",")
         lineData = lineData[:5] 
         if(lineData[1] in selectedCases):
-            print(lineData[1])
             lineData += selectedCases.get(lineData[1])
-            #lineData[5] = str(caseBP.get(lineData[1]))
-            #lineData.append(str(caseAge.get(lineData[1])))
         elif(lineData[1] in selectedControls):
             lineData += selectedControls.get(lineData[1])
-            #lineData[5] = str(contBP.get(lineData[1]))
-            #lineData.append(str(contAge.get(lineData[1])))
         if(lineData[1] in selected):
             lineData[0] = str(famDict.getIID(lineData[0]))
             convertLD(lineData)
@@ -129,7 +124,7 @@ def main(selectedCases, selectedControls):
             newLine = [lineData[col] for col in goodCols]
             snp = str(lineData[1] + "_" + lineData[2])
             alt = lineData[4]
-            count = [lineData[col].count(alt) for col in goodCols]
+            count = [str(lineData[col].count(alt)) for col in goodCols]
             dose = [(lineData[1] + "_" + lineData[2])]
             dose = [snp] + count
             if(lc < 10):
