@@ -42,6 +42,7 @@ def main(selectedCases, selectedControls):
     KICFilePath = "/home/o/otles/KIC_out"
     kinFilePath = currentWorkingDir + "/kin.txt"
 
+    selected = selectedCases.keys() + selectedControls.keys()
     
     #phenotype file
     print("Creating phenotype file")
@@ -182,9 +183,9 @@ def loadCC(caseFilepath, contFilepath, selectedControlsList):
         selectedCases.update({lineData[1] : lineData[2:len(lineData)-1]})
     for line in contFile:
         lineData = line.strip().split("\t")
-        if lineData[1] in selectedControls:
+        if lineData[1] in selectedControlsList:
             selectedControls.update({lineData[1] : lineData[2:len(lineData)-1]})
-    selected = selectedCases.keys() + selectedControls.keys()
+    #selected = selectedCases.keys() + selectedControls.keys()
     
     caseFile.close()
     contFile.close()
