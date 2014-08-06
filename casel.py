@@ -53,13 +53,13 @@ class Person(object):
                 
 
 def autoCall(caseFp, contFp, contRatio, kicFp):
-    caseFilepath = caseFp
-    contFilepath = contFp
-    numberOfControlsPerCase = contRatio
-    KICoutFilepath = kicFp
-    return main()
+    #caseFilepath = caseFp
+    #contFilepath = contFp
+    #numberOfControlsPerCase = contRatio
+    #KICoutFilepath = kicFp
+    return main(contRatio, kicFp, caseFp, contFp)
             
-def main():
+def main(numberOfControlsPerCase = 2,KICoutFilepath = currDir + "/KIC_out",caseFilepath = currDir + "/cases",contFilepath = currDir + "/controls"):
     print(caseFilepath)
     print(numberOfControlsPerCase)
     #load cases
