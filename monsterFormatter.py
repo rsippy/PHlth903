@@ -51,12 +51,12 @@ def main(selectedCases, selectedControls):
         lineData = line.strip().split(",")
         lineData = lineData[:5] 
         if(lineData[1] in selectedCases):
-            print(lineData[0])
-            lineData += selectedCases.get(lineData[0])
+            print(lineData[1])
+            lineData += selectedCases.get(lineData[1])
             #lineData[5] = str(caseBP.get(lineData[1]))
             #lineData.append(str(caseAge.get(lineData[1])))
         elif(lineData[1] in selectedControls):
-            lineData += selectedControls.get(lineData[0])
+            lineData += selectedControls.get(lineData[1])
             #lineData[5] = str(contBP.get(lineData[1]))
             #lineData.append(str(contAge.get(lineData[1])))
         if(lineData[1] in selected):
