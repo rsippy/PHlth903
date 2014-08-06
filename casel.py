@@ -64,10 +64,10 @@ def main():
     print(numberOfControlsPerCase)
     #load cases
     caseFile = open(caseFilepath)
+    next(caseFile)
     for caseData in caseFile:
         caseData = caseData.strip().split("\t")
         caseID = caseData[1]
-        caseID = caseID.strip()
         case = Person(caseID)
         people.update({caseID : case})
         cases.append(case)
