@@ -58,7 +58,7 @@ def main(selectedCases, selectedControls):
             lineData += selectedControls.get(lineData[1])
         if(lineData[1] in selected):
             newIID = famDict.getIID(lineData[0])
-            print(lineData[0] + "|" + newIID)
+            print(lineData[0] + "|" + str(newIID))
             lineData[0] = str(newIID)
             convertLD(lineData)
             phenoFile.write("\t".join(lineData) + "\n")
