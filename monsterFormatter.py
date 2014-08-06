@@ -102,7 +102,7 @@ def main(selectedCases, selectedControls):
     
     header = next(mapFile).strip().split("\t")
     print(header)
-    newHeader = []
+    newHeader = [0]
     goodCols = []
     for i,col in enumerate(header):
         if(col in selected):
