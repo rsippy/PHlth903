@@ -108,13 +108,10 @@ def main(selectedCases, selectedControls):
         if(col in selected):
             newHeader.append(indDict.getIID(col))
             goodCols.append(i)
-            
-    print(newHeader)
-    print(goodCols)    
+    
     print("sorting")
     newHeader, goodCols = (list(x) for x in zip(*sorted(zip(newHeader, goodCols))))
-    print(newHeader)
-    print(goodCols)
+    newHeader = [str(i) for i in newHeader]
     
     genFile = open(genFilePath, "w+")
     genFile.write("\t".join(newHeader) + "\n")
