@@ -177,6 +177,8 @@ def loadCC(caseFilepath, contFilepath, selectedControlsList):
     
     caseFile = open(caseFilepath)
     contFile = open(contFilepath)
+    next(caseFile)
+    next(contFile)
     
     for line in caseFile:
         lineData = line.strip().split("\t")
