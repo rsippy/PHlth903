@@ -51,6 +51,7 @@ def main(selectedCases, selectedControls):
         lineData = line.strip().split(",")
         lineData = lineData[:5] 
         if(lineData[1] in selectedCases):
+            print(lineData[0])
             lineData += selectedCases.get(lineData[0])
             #lineData[5] = str(caseBP.get(lineData[1]))
             #lineData.append(str(caseAge.get(lineData[1])))
