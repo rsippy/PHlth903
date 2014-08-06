@@ -120,21 +120,23 @@ def main(selectedCases, selectedControls):
     print(newHeader)
     print(goodCols)
     
-    #next(mapFile)
+    genFile = open(genFilePath, "w+")
     lc = 0
     for line in mapFile:
         lineData = line.strip().split("\t")
         #ask burcu about this
         if(len(lineData) != 823):
             newLine = [lineData[col] for col in goodCols]
+            snp = str(lineData[1] + "_" + lineData[2])
             alt = lineData[4]
             count = [lineData[col].count(alt) for col in goodCols]
             dose = [(lineData[1] + "_" + lineData[2])]
-            dose += count
+            dose = [snp] + count
             if(lc < 10):
-                print(count)
+                #print(count)
                 print(dose)
                 lc+=1
+            genFile.write("\t".join(dose) + "\n")
             #print(newLine)
             gene = str(lineData[823])
             snp = str(lineData[1] + "_" + lineData[2])
