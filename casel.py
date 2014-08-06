@@ -88,7 +88,7 @@ def main(numberOfControlsPerCase = 2,KICoutFilepath = currDir + "/KIC_out",caseF
     contFile.close()
     
     if (neededControls >= len(controls)):
-        print(controls)
+        #print(controls)
         print("Warning need more controls than available - returning all")
         return([person.id for person in controls])
     
