@@ -101,9 +101,9 @@ def main(selectedCases, selectedControls):
     SNPFile = open(SNPFilePath, "w+")
     
     header = next(mapFile).strip().split("\t")
-    print(header)
+    #print(header)
     newHeader = [0]
-    goodCols = []
+    goodCols = [0]
     for i,col in enumerate(header):
         if(col in selected):
             newHeader.append(indDict.getIID(col))
