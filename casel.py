@@ -88,8 +88,9 @@ def main(numberOfControlsPerCase = 2,KICoutFilepath = currDir + "/KIC_out",caseF
     contFile.close()
     
     if (neededControls >= len(controls)):
+        print(controls)
         print("Warning need more controls than available - returning all")
-        return controls
+        return(controls)
     
     print("%d cases and %d potential controls" %(len(cases), len(controls)))
     
@@ -156,7 +157,7 @@ def main(numberOfControlsPerCase = 2,KICoutFilepath = currDir + "/KIC_out",caseF
     #print("Final KIC score: %d" %kicScore(cases, selectedControls))
     print([person.id for person in cases])
     print([person.id for person in selectedControls])
-    return selectedControls
+    return(selectedControls)
 
 def hungarianAssignment(cases, controls, numberOfControlsPerCase):
     selectedControls = list()
