@@ -60,9 +60,13 @@ def autoCall(caseFp, contFp, contRatio, kicFp):
     return main()
             
 def main():
+    print(caseFilepath)
+    print(numberOfControlsPerCase)
     #load cases
     caseFile = open(caseFilepath)
-    for caseID in caseFile:
+    for caseData in caseFile:
+        caseData = caseData.strip().split("\t")
+        caseID = caseData[1]
         caseID = caseID.strip()
         case = Person(caseID)
         people.update({caseID : case})
