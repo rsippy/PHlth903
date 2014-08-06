@@ -42,6 +42,13 @@ def main(selectedCases, selectedControls):
     KICFilePath = "/home/o/otles/KIC_out"
     kinFilePath = currentWorkingDir + "/kin.txt"
 
+    naughty = "T2DG0200075"
+
+    if(selectedCases.has_key(naughty)):
+        selectedCases.pop(naughty)
+    if(selectedControls.has_key(naughty)):
+        selectedControls.pop(naughty)
+
     selected = selectedCases.keys() + selectedControls.keys()
     print("making inputs based on %d cases and %d controls" %(len(selectedCases), len(selectedControls)))
     
