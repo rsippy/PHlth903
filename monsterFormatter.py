@@ -7,6 +7,7 @@ import os
 import sys
 
 from idTable import IDTable as idTable
+from Tkconstants import SEL
 
 
 #TODO: load case info from file instead of custom dict
@@ -24,6 +25,9 @@ indDict.put("0", 0)
 famDict = idTable()
 famDict.put("0", 0)
 
+def autoCall(caseFilepath, contFilepath, selectedControlsList):
+    loadCC(caseFilepath, contFilepath, selectedControlsList)
+    main()
 
 #TODO: put all files generated in a temporary directory
 #TODO: add ability to run MONSTER directly
@@ -46,11 +50,14 @@ def main():
     phenoFile = open(phenoFilePath, "w+")
     for line in pedFile:
         lineData = line.strip().split(",")
+        lineData = lineData[:5] 
         if(lineData[1] in selectedCases):
-            lineData[5] = str(caseBP.get(lineData[1]))
+            lineData += selectedCases.get(lineData[0])
+            #lineData[5] = str(caseBP.get(lineData[1]))
             #lineData.append(str(caseAge.get(lineData[1])))
         elif(lineData[1] in selectedControls):
-            lineData[5] = str(contBP.get(lineData[1]))
+            lineData += selectedControls.get(lineData[0])
+            #lineData[5] = str(contBP.get(lineData[1]))
             #lineData.append(str(contAge.get(lineData[1])))
         if(lineData[1] in selected):
             lineData[0] = str(famDict.getIID(lineData[0]))
@@ -166,17 +173,20 @@ def convertLD(lineData):
     for i in xrange(1,4):
         lineData[i] = str(indDict.getIID(lineData[i]))
         
-def loadCC(ccFilePath):
+def loadCC(caseFilepath, contFilepath, selectedControlsList):
     selectedCases = dict()
     selectedControls = dict()
     
-    ccFile = open(ccFilePath)
-    for line in ccFile:
+    caseFile = open(caseFilepath)
+    contFile = open(contFilepath)
+    
+    for line in caseFile:
         lineData = line.strip().split(",")
-        if(lineData[-1]  == 1):
-            selectedCases.update({lineData[0] : lineData[:len(lineData)-1]})
-        else:
-            selectedControls.update({lineData[0] : lineData[:len(lineData)-1]})
+        selectedCases.update({lineData[1] : lineData[2:len(lineData)-1]})
+    for line in contFile:
+        lineData = line.strip().split(",")
+        if lineData[1] in selectedControls:
+            selectedControls.update({lineData[1] : lineData[2:len(lineData)-1]})
     selected = selectedCases.viewkeys() + selectedControls.viewkeys()
 
 if __name__ == '__main__':

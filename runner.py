@@ -7,6 +7,7 @@ Created on Aug 5, 2014
 #import argparse
 import sys
 from casel import autoCall as casel
+from monsterFormatter import autoCall as monsterFormatter
 
 #parser = argparse.ArgumentParser(description='Process a list of cases and ' +
 #                                 'potential controls, finding the best ' + 
@@ -22,14 +23,15 @@ from casel import autoCall as casel
 #args = parser.parse_args()
 
 def main():
-    args = sys.argv
+    args = sys.argv[1:]
     caseFilepath = args[0]
     contFilepath = args[1]
     contRatio = args[2]
     kicFilepath = args[3]
     mapFilepath = args[4]
     
-    casel(caseFilepath, contFilepath, contRatio, kicFilepath)
+    selectedControlsList = casel(caseFilepath, contFilepath, contRatio, kicFilepath)
+    monsterFormatter(caseFilepath, contFilepath, selectedControlsList)
     
 
 if __name__ == '__main__':
