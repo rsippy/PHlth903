@@ -89,8 +89,7 @@ def main(numberOfControlsPerCase = 2,KICoutFilepath = currDir + "/KIC_out",caseF
     
     if (neededControls >= len(controls)):
         print("Warning need more controls than available - returning all")
-        selectedControls = controls
-        return selectedControls
+        return controls
     
     print("%d cases and %d potential controls" %(len(cases), len(controls)))
     
