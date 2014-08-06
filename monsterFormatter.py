@@ -180,13 +180,16 @@ def loadCC(caseFilepath, contFilepath, selectedControlsList):
     contFile = open(contFilepath)
     
     for line in caseFile:
-        lineData = line.strip().split(",")
+        lineData = line.strip().split("\t")
         selectedCases.update({lineData[1] : lineData[2:len(lineData)-1]})
     for line in contFile:
-        lineData = line.strip().split(",")
+        lineData = line.strip().split("\t")
         if lineData[1] in selectedControls:
             selectedControls.update({lineData[1] : lineData[2:len(lineData)-1]})
     selected = selectedCases.viewkeys() + selectedControls.viewkeys()
+    
+    caseFile.close()
+    contFile.close()
 
 if __name__ == '__main__':
     main()
