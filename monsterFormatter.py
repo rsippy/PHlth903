@@ -117,6 +117,7 @@ def main(selectedCases, selectedControls):
     print(goodCols)
     
     genFile = open(genFilePath, "w+")
+    genFile.write("\t".join(newHeader) + "\n")
     lc = 0
     for line in mapFile:
         lineData = line.strip().split("\t")
