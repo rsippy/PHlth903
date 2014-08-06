@@ -25,12 +25,12 @@ famDict = idTable()
 famDict.put("0", 0)
 
 def autoCall(caseFilepath, contFilepath, selectedControlsList):
-    loadCC(caseFilepath, contFilepath, selectedControlsList)
-    main()
+    [selectedCases, selectedControls] = loadCC(caseFilepath, contFilepath, selectedControlsList)
+    main(selectedCases, selectedControls)
 
 #TODO: put all files generated in a temporary directory
 #TODO: add ability to run MONSTER directly
-def main():
+def main(selectedCases, selectedControls):
     
     currentWorkingDir = os.getcwd()
     pedFilePath = currentWorkingDir + "/PED.csv"
@@ -190,6 +190,8 @@ def loadCC(caseFilepath, contFilepath, selectedControlsList):
     
     caseFile.close()
     contFile.close()
+    
+    return[selectedCases, selectedControls]
 
 if __name__ == '__main__':
     main()
