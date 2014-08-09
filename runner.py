@@ -34,9 +34,9 @@ def main():
     selectedControlsList = casel(caseFilepath, contFilepath, contRatio, kicFilepath)
     monFiles = monsterFormatter(caseFilepath, contFilepath, selectedControlsList)
     
-    subprocess.call([" /project/EngelmanGroup/GAW19/MONSTER/scr/./MONSTER",
-                     "-p", monFiles[0], "-g", monFiles[1], "-s", monFiles[2],
-                     "-k", kicFilepath])
+    #subprocess.call([" /project/EngelmanGroup/GAW19/MONSTER/scr/./MONSTER",
+    #                 "-p", monFiles[0], "-g", monFiles[1], "-s", monFiles[2],
+    #                 "-k", kicFilepath])
     
 
 if __name__ == '__main__':
