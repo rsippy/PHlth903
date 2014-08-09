@@ -148,9 +148,9 @@ def main(selectedCases, selectedControls):
     for gene,snpList in geneMap.iteritems():
         geneString = str(gene) + "\t0"
         if(len(snpList) < 1000):
-            geneString += "\t".join(snpList)
-        #for snp in snpList:
-        #    geneString += "\t" + snp
+            #geneString += "\t".join(snpList)
+            for snp in snpList:
+                geneString += "\t" + snp
         geneString += "\n"
         SNPFile.write(geneString)
     SNPFile.close()
