@@ -6,6 +6,7 @@ Created on Aug 5, 2014
 
 #import argparse
 import sys
+import subprocess
 from casel import autoCall as casel
 from monsterFormatter import autoCall as monsterFormatter
 
@@ -31,7 +32,11 @@ def main():
     mapFilepath = args[4]
     
     selectedControlsList = casel(caseFilepath, contFilepath, contRatio, kicFilepath)
-    monsterFormatter(caseFilepath, contFilepath, selectedControlsList)
+    monFiles = monsterFormatter(caseFilepath, contFilepath, selectedControlsList)
+    
+    subprocess.call([" /project/EngelmanGroup/GAW19/MONSTER/scr/./MONSTER",
+                     "-p", monFiles[0], "-g", monFiles[1], "-s", monFiles[2],
+                     "-k", kicFilepath])
     
 
 if __name__ == '__main__':

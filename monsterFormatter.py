@@ -133,10 +133,10 @@ def main(selectedCases, selectedControls):
             count = [str(lineData[col].count(alt)) for col in goodCols]
             dose = [(lineData[1] + "_" + lineData[2])]
             dose = [snp] + count
-            if(lc < 10):
+            #if(lc < 10):
                 #print(count)
-                print(dose)
-                lc+=1
+                #print(dose)
+                #lc+=1
             genFile.write("\t".join(dose) + "\n")
             #print(newLine)
             gene = str(lineData[823])
@@ -151,7 +151,7 @@ def main(selectedCases, selectedControls):
     geneListFile = open(geneListFilePath, "w+")
     count = 0
     
-    naughtyList = ["SNORA62", "RBM15B;MANF"]
+    naughtyList = ["SNORA62", "RBM15B;MANF", "MIR6824"]
     
     for gene,snpList in geneMap.iteritems():
         geneListFile.write(str(count) + "," + str(gene) +"\n")
@@ -180,6 +180,8 @@ def main(selectedCases, selectedControls):
             kinFile.write("\t".join(lineData) + "\n")
     KICFile.close()
     kinFile.close()
+    
+    return([phenoFilePath, genFilePath, SNPFilePath])
             
 
 
