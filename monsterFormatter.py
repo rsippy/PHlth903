@@ -149,9 +149,11 @@ def main(selectedCases, selectedControls):
     mapFile.close()
     
     geneListFile = open(geneListFilePath, "w+")
+    count = 0
     
-    for index,gene,snpList in enumerate(geneMap.iteritems()):
-        geneListFile.write(index + "," + str(gene))
+    for gene,snpList in geneMap.iteritems():
+        geneListFile.write(count + "," + str(gene))
+        count += 1
         geneString = str(gene) + "\t0"
         if(len(snpList) < 1000):
             #geneString += "\t".join(snpList)
