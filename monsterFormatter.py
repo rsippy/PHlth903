@@ -155,7 +155,7 @@ def main(selectedCases, selectedControls):
         geneListFile.write(str(count) + "," + str(gene) +"\n")
         count += 1
         geneString = str(gene) + "\t0"
-        if((len(snpList) < 1000) or (gene == "SNORA62")):
+        if((len(snpList) < 1000) and (gene != "SNORA62")):
             #geneString += "\t".join(snpList)
             for snp in snpList:
                 geneString += "\t" + snp
