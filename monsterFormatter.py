@@ -152,7 +152,7 @@ def main(selectedCases, selectedControls):
     count = 0
     
     for gene,snpList in geneMap.iteritems():
-        geneListFile.write(count + "," + str(gene))
+        geneListFile.write(str(count) + "," + str(gene))
         count += 1
         geneString = str(gene) + "\t0"
         if(len(snpList) < 1000):
