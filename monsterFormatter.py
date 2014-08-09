@@ -151,7 +151,7 @@ def main(selectedCases, selectedControls):
     geneListFile = open(geneListFilePath, "w+")
     count = 0
     
-    naughtyList = ["SNORA62", "C3orf17"]
+    naughtyList = ["SNORA62", "RBM15B;MANF"]
     
     for gene,snpList in geneMap.iteritems():
         geneListFile.write(str(count) + "," + str(gene) +"\n")
