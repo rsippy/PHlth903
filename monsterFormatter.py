@@ -151,12 +151,14 @@ def main(selectedCases, selectedControls):
     geneListFile = open(geneListFilePath, "w+")
     count = 0
     
-    naughtyList = ["SNORA62", "RBM15B;MANF", "MIR6824", "MAGI1", "PCBP4;ABHD14B"]
+    naughtyList = ["SNORA62", "RBM15B;MANF", "MIR6824", "MAGI1", "PCBP4;ABHD14B", "MBNL1"]
     
     for gene,snpList in geneMap.iteritems():
         geneListFile.write(str(count) + "," + str(gene) +"\n")
         count += 1
         geneString = str(gene) + "\t0"
+        if(gene in naughtyList):
+            print(",".join(snpList))
         if((len(snpList) < 1000) and not(gene in naughtyList)):
             #geneString += "\t".join(snpList)
             for snp in snpList:
