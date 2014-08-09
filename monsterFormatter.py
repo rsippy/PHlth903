@@ -41,6 +41,8 @@ def main(selectedCases, selectedControls):
     SNPFilePath = currentWorkingDir + "/SNP.txt"
     KICFilePath = "/home/o/otles/KIC_out"
     kinFilePath = currentWorkingDir + "/kin.txt"
+    
+    geneListFilePath = currentWorkingDir + "/geneList.txt"
 
     naughty = "T2DG0200075"
 
@@ -145,7 +147,11 @@ def main(selectedCases, selectedControls):
             snpList.append(snp)
             geneMap.update({gene : snpList})
     mapFile.close()
-    for gene,snpList in geneMap.iteritems():
+    
+    geneListFile = open(geneListFilePath, "w+")
+    
+    for index,gene,snpList in enumerate(geneMap.iteritems()):
+        geneListFile.write(index + "," + str(gene))
         geneString = str(gene) + "\t0"
         if(len(snpList) < 1000):
             #geneString += "\t".join(snpList)
@@ -153,6 +159,7 @@ def main(selectedCases, selectedControls):
                 geneString += "\t" + snp
         geneString += "\n"
         SNPFile.write(geneString)
+    geneListFile.close()
     SNPFile.close()
     
     
