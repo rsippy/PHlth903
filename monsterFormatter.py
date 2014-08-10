@@ -152,7 +152,7 @@ def main(selectedCases, selectedControls):
     count = 0
     
     naughtyList = ["SNORA62", "RBM15B;MANF", "MIR6824", "MAGI1", "PCBP4;ABHD14B", "MBNL1", "MLH1;MLH1",
-                   "EIF4E3;GPR27", "FRG2C", "ZNF717", "TRAIP;CAMKV"]
+                   "EIF4E3;GPR27", "FRG2C", "ZNF717", "TRAIP;CAMKV", "SCARNA7"]
     
     for gene,snpList in geneMap.iteritems():
         geneListFile.write(str(count) + "," + str(gene) +"\n")
