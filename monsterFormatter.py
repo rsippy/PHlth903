@@ -33,16 +33,16 @@ def autoCall(caseFilepath, contFilepath, selectedControlsList):
 def main(selectedCases, selectedControls):
     
     currentWorkingDir = os.getcwd()
-    pedFilePath = currentWorkingDir + "/PED.csv"
-    phenoFilePath = currentWorkingDir + "/pheno.txt"
-    doseFilePath = "/project/EngelmanGroup/GAW19/GAW19_data/FamilyDataSet/Genotype Files/DOSE/chr3-dose.csv/chr3-dose.csv"
-    genFilePath = currentWorkingDir + "/geno.txt"
-    mapFilePath = "/project/EngelmanGroup/GAW19/chr3genoMAPPED.txt"
-    SNPFilePath = currentWorkingDir + "/SNP.txt"
-    KICFilePath = "/home/o/otles/KIC_out"
-    kinFilePath = currentWorkingDir + "/kin.txt"
+    pedFilePath = currentWorkingDir + "\PED.csv"
+    phenoFilePath = currentWorkingDir + "\pheno.txt"
+    doseFilePath = "\project\EngelmanGroup\GAW19\GAW19_data\FamilyDataSet\Genotype Files\DOSE\chr3-dose.csv\chr3-dose.csv"
+    genFilePath = currentWorkingDir + "\geno.txt"
+    mapFilePath = "\project/EngelmanGroup\GAW19\chr3genoMAPPED.txt"
+    SNPFilePath = currentWorkingDir + "\SNP.txt"
+    KICFilePath = "\home\o\otles\KIC_out"
+    kinFilePath = currentWorkingDir + "\kin.txt"
     
-    geneListFilePath = currentWorkingDir + "/geneList.txt"
+    geneListFilePath = currentWorkingDir + "\geneList.txt"
 
     naughty = "T2DG0200075"
 
